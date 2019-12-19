@@ -55,10 +55,17 @@
     <Compile Include="Model\Album.cs" />
     <Compile Include="Model\Artist.cs" />
     <Compile Include="Model\Genre.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderDetail.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Respositories\AlbumRespository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Respositories\" />
+    <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">
+      <Project>{D55C57D7-C0F1-4CC0-906F-DF862C8C66CB}</Project>
+      <Name>Demo.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

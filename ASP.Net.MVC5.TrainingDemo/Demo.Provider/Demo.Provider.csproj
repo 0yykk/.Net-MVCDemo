@@ -42,6 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\AlbumProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Demo.Data\Demo.Data.csproj">
+      <Project>{8EEC73B9-FAA3-4D71-B1DA-3D192A57A5D8}</Project>
+      <Name>Demo.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">
+      <Project>{D55C57D7-C0F1-4CC0-906F-DF862C8C66CB}</Project>
+      <Name>Demo.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

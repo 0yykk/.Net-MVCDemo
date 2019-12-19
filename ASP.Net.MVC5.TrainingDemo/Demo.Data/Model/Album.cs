@@ -18,7 +18,11 @@ namespace Demo.Data.Model
         public virtual string Title { get; set; }
         public virtual decimal Price { get; set; }
         public virtual string AlbumArtUrl  { get; set; }
+        [ForeignKey("Genre")]
+        public string GenreName { get; set; }
         public virtual Genre Genre { get; set; }
+        [ForeignKey("Artist")]
+        public string ArtistName { get; set; }
         public virtual Artist Artist { get; set; }
         public virtual DateTime PublicDate { get; set; }
     }

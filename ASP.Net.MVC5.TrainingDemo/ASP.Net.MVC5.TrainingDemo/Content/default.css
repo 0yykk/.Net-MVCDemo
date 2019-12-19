@@ -1,0 +1,327 @@
+h3 {
+	color: rgb(209, 40, 46);
+}
+h4 {
+	color: rgb(209, 40, 46);
+}
+h5 {
+	color: rgb(209, 40, 46);
+}
+a {
+	color: rgb(209, 40, 46);
+}
+a:hover {
+	color: rgb(241, 153, 51);
+}
+a:active {
+	color: rgb(241, 153, 51);
+}
+.alternative-font {
+	color: rgb(209, 40, 46);
+}
+p:first-child.drop-caps::first-letter {
+	color: rgb(209, 40, 46);
+}
+p:first-child.secundary.drop-caps::first-letter {
+	background-color: rgb(209, 40, 46);
+}
+ul.nav-pills > li.active > a {
+	background-color: rgb(209, 40, 46);
+}
+ul.nav-pills > li.active > a:hover {
+	background-color: rgb(209, 40, 46);
+}
+ul.nav-pills > li.active > a:focus {
+	background-color: rgb(209, 40, 46);
+}
+.sort-source-wrapper .nav > li.active > a {
+	color: rgb(209, 40, 46);
+}
+.sort-source-wrapper .nav > li.active > a:hover {
+	color: rgb(209, 40, 46);
+}
+.sort-source-wrapper .nav > li.active > a:focus {
+	color: rgb(209, 40, 46);
+}
+.pagination > .active a {
+	background-color: rgb(209, 40, 46) !important;
+}
+.pagination > .active span {
+	background-color: rgb(209, 40, 46) !important;
+}
+.pagination > .active a:hover {
+	background-color: rgb(209, 40, 46) !important;
+}
+.pagination > .active span:hover {
+	background-color: rgb(209, 40, 46) !important;
+}
+.pagination > .active a:focus {
+	background-color: rgb(209, 40, 46) !important;
+}
+.pagination > .active span:focus {
+	background-color: rgb(209, 40, 46) !important;
+}
+.btn-primary {
+	border-color: rgb(209, 40, 46) !important; color: rgb(255, 255, 255); text-shadow: 0px -1px 0px rgba(0,0,0,0.25); background-color: rgb(209, 40, 46);
+}
+.pagination > .active > a {
+	border-color: rgb(209, 40, 46) !important; color: rgb(255, 255, 255); text-shadow: 0px -1px 0px rgba(0,0,0,0.25); background-color: rgb(209, 40, 46);
+}
+.btn-primary:hover {
+	border-color: rgb(209, 40, 46); background-color: rgb(209, 40, 46);
+}
+.pagination > .active > a:hover {
+	border-color: rgb(209, 40, 46); background-color: rgb(209, 40, 46);
+}
+.btn-primary:active {
+	border-color: rgb(209, 40, 46); background-color: rgb(209, 40, 46);
+}
+.pagination > .active > a:active {
+	border-color: rgb(209, 40, 46); background-color: rgb(209, 40, 46);
+}
+.btn-primary:focus {
+	border-color: rgb(209, 40, 46); background-color: rgb(209, 40, 46);
+}
+.pagination > .active > a:focus {
+	border-color: rgb(209, 40, 46); background-color: rgb(209, 40, 46);
+}
+.progress-bar-primary {
+	background-color: rgb(209, 40, 46);
+}
+section.highlight {
+	border-color: rgb(241, 153, 51) !important; background-color: rgb(209, 40, 46) !important;
+}
+section.page-top h2 {
+	border-bottom-color: rgb(209, 40, 46);
+}
+section.toggle label {
+	color: rgb(54, 54, 54); border-left-color: rgb(209, 40, 46);
+}
+section.active.toggle > label {
+	border-color: rgb(209, 40, 46); color: rgb(255, 255, 255); background-color: rgb(209, 40, 46);
+}
+section.custom-product.page-top {
+	border-top-color: rgb(209, 40, 46); background-color: rgb(241, 153, 51);
+}
+.feature-box .feature-box-icon {
+	background-color: rgb(209, 40, 46);
+}
+.secundary.feature-box .feature-box-icon i.icon {
+	color: rgb(209, 40, 46);
+}
+.thumb-info .thumb-info-type {
+	background-color: rgb(209, 40, 46);
+}
+.thumb-info .thumb-info-action-icon {
+	background-color: rgb(209, 40, 46);
+}
+.thumb-info-social-icons a {
+	background-color: rgb(209, 40, 46);
+}
+.thumbnail .zoom {
+	background-color: rgb(209, 40, 46);
+}
+.inverted {
+	background-color: rgb(209, 40, 46);
+}
+.tabs ul.nav-tabs a {
+	color: rgb(209, 40, 46);
+}
+.tabs ul.nav-tabs a:hover {
+	color: rgb(209, 40, 46);
+}
+.tabs ul.nav-tabs a:hover {
+	border-top-color: rgb(209, 40, 46);
+}
+.tabs ul.nav-tabs li.active a {
+	color: rgb(209, 40, 46); border-top-color: rgb(209, 40, 46);
+}
+.tabs-bottom.tabs ul.nav-tabs li a:hover {
+	border-bottom-color: rgb(209, 40, 46);
+}
+.tabs-bottom.tabs ul.nav-tabs li.active a {
+	border-bottom-color: rgb(209, 40, 46);
+}
+.tabs-bottom.tabs ul.nav-tabs li.active a:hover {
+	border-bottom-color: rgb(209, 40, 46);
+}
+.tabs-bottom.tabs ul.nav-tabs li.active a:focus {
+	border-bottom-color: rgb(209, 40, 46);
+}
+.tabs-left.tabs-vertical.tabs ul.nav-tabs li a:hover {
+	border-left-color: rgb(209, 40, 46);
+}
+.tabs-left.tabs-vertical.tabs ul.nav-tabs li.active a {
+	border-left-color: rgb(209, 40, 46);
+}
+.tabs-left.tabs-vertical.tabs ul.nav-tabs li.active a:hover {
+	border-left-color: rgb(209, 40, 46);
+}
+.tabs-left.tabs-vertical.tabs ul.nav-tabs li.active a:focus {
+	border-left-color: rgb(209, 40, 46);
+}
+.tabs-right.tabs-vertical.tabs ul.nav-tabs li a:hover {
+	border-right-color: rgb(209, 40, 46);
+}
+.tabs-right.tabs-vertical.tabs ul.nav-tabs li.active a {
+	border-right-color: rgb(209, 40, 46);
+}
+.tabs-right.tabs-vertical.tabs ul.nav-tabs li.active a:hover {
+	border-right-color: rgb(209, 40, 46);
+}
+.tabs-right.tabs-vertical.tabs ul.nav-tabs li.active a:focus {
+	border-right-color: rgb(209, 40, 46);
+}
+ul.icons.list li i {
+	color: rgb(209, 40, 46);
+}
+i.icon-featured {
+	background-color: rgb(209, 40, 46);
+}
+.parallax blockquote i.icon-quote-left {
+	color: rgb(209, 40, 46);
+}
+section.video blockquote i.icon-quote-left {
+	color: rgb(209, 40, 46);
+}
+.panel-group .panel-heading a {
+	color: rgb(209, 40, 46);
+}
+.secundary.panel-group .panel-heading {
+	background-color: rgb(209, 40, 46) !important;
+}
+#header nav ul.nav-main ul.dropdown-menu {
+	color: rgb(255, 255, 255); background-color: rgb(209, 40, 46) !important;
+}
+#header nav ul.nav-main li.open.dropdown .dropdown-toggle {
+	color: rgb(255, 255, 255); background-color: rgb(209, 40, 46) !important;
+}
+#header nav ul.nav-main li.active a {
+	color: rgb(255, 255, 255); background-color: rgb(209, 40, 46) !important;
+}
+#header nav ul.nav-main li > a:hover {
+	color: rgb(255, 255, 255); background-color: rgb(209, 40, 46) !important;
+}
+#header nav ul.nav-main li.dropdown:hover a {
+	color: rgb(255, 255, 255); background-color: rgb(209, 40, 46) !important;
+}
+#header nav ul.nav-main ul.dropdown-menu li:hover > a {
+	background-color: rgb(241, 153, 51) !important;
+}
+#header nav ul.nav-main ul.dropdown-menu {
+	border-color: rgb(209, 40, 46); color: rgb(255, 255, 255); text-shadow: 0px -1px 0px rgba(0,0,0,0.25); background-color: rgb(209, 40, 46);
+}
+#header nav ul.nav-main ul.dropdown-menu:hover {
+	border-color: rgb(0, 153, 230); background-color: rgb(0, 153, 230);
+}
+#header nav ul.nav-main ul.dropdown-menu:active {
+	border-color: rgb(241, 153, 51); background-color: rgb(241, 153, 51);
+}
+#header nav ul.nav-main ul.dropdown-menu:focus {
+	border-color: rgb(241, 153, 51); background-color: rgb(241, 153, 51);
+}
+#header nav ul.nav-main li.dropdown:hover ul.dropdown-menu li > a {
+	background: none !important;
+}
+#header nav ul.nav-main li.dropdown:hover ul.dropdown-menu li > a:hover {
+	background: rgb(241, 153, 51) !important;
+}
+.single-menu#header nav ul.nav-main li.active > a {
+	border-top-color: rgb(209, 40, 46); border-top-width: 5px; border-top-style: solid;
+}
+.darken-top-border#header {
+	border-top-color: rgb(241, 153, 51) !important; border-top-width: 5px !important; border-top-style: solid !important;
+}
+.colored#header .header-top {
+	background-color: rgb(209, 40, 46);
+}
+.colored#header .header-top ul.nav-top li a:hover {
+	background-color: rgb(0, 153, 230) !important;
+}
+.flat-menu#header nav ul.nav-main li > a {
+	color: rgb(102, 102, 102);
+}
+.flat-menu#header nav ul.nav-main li.active > a {
+	color: rgb(102, 102, 102);
+}
+.flat-menu#header nav ul.nav-main li.active > a {
+	color: rgb(209, 40, 46); background-color: transparent !important;
+}
+.flat-menu#header nav ul.nav-main li > a:hover {
+	color: rgb(255, 255, 255); background-color: rgb(209, 40, 46) !important;
+}
+.flat-menu#header nav ul.nav-main li.dropdown:hover a {
+	color: rgb(255, 255, 255); background-color: rgb(209, 40, 46) !important;
+}
+#header nav.mega-menu ul.nav-main li.mega-menu-item ul.dropdown-menu {
+	border-top-color: rgb(209, 40, 46);
+}
+blockquote.testimonial {
+	background: rgb(209, 40, 46);
+}
+.testimonial-arrow-down {
+	border-top-color: rgb(209, 40, 46);
+}
+.featured-box-secundary i.icon-featured {
+	background-color: rgb(209, 40, 46);
+}
+.featured-box-secundary h4 {
+	color: rgb(209, 40, 46);
+}
+.featured-box-secundary .box-content {
+	border-top-color: rgb(209, 40, 46);
+}
+.pricing-table .most-popular {
+	border-color: rgb(209, 40, 46);
+}
+.pricing-table .most-popular h3 {
+	background-color: rgb(209, 40, 46);
+}
+section.timeline .left.timeline-box::before {
+	background: rgb(209, 40, 46); box-shadow: 0px 0px 0px 3px #ffffff, 0px 0px 0px 6px #0088cc;
+}
+section.timeline .right.timeline-box::before {
+	background: rgb(209, 40, 46); box-shadow: 0px 0px 0px 3px #ffffff, 0px 0px 0px 6px #0088cc;
+}
+ul.history li .featured-box .box-content {
+	border-top-color: rgb(209, 40, 46);
+}
+.recent-posts .date .month {
+	background-color: rgb(209, 40, 46);
+}
+article.post .post-date .month {
+	background-color: rgb(209, 40, 46);
+}
+.recent-posts .date .day {
+	color: rgb(209, 40, 46);
+}
+article.post .post-date .day {
+	color: rgb(209, 40, 46);
+}
+.slider .tp-bannertimer {
+	background-color: rgb(209, 40, 46);
+}
+.home-intro p em {
+	color: rgb(0, 170, 255);
+}
+.home-concept strong {
+	color: rgb(209, 40, 46);
+}
+.shop ul.products li.product .onsale {
+	border-bottom-color: rgb(0, 109, 163); background-color: rgb(209, 40, 46);
+}
+.shop .star-rating span {
+	color: rgb(209, 40, 46);
+}
+.shop .cart-totals tr.total .amount {
+	color: rgb(209, 40, 46);
+}
+#footer .footer-ribbon {
+	background: rgb(209, 40, 46);
+}
+#footer .footer-ribbon::before {
+	border-right-color: rgb(126, 22, 25);
+}
+body.boxed .body {
+	border-top-color: rgb(209, 40, 46);
+}

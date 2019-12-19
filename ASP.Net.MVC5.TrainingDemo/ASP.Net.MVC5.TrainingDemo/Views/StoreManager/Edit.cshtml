@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+@model Demo.Domain.AlbumViewModel
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>@ViewBag.Type Album</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AlbunmId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.AlbunmId, htmlAttributes: new { @style = "width:230px;height:34px;background:#CCCCCC", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.AlbunmId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Artist, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="input-group">
+                
+                @Html.TextBoxFor(model => model.Artist, new { @class = "form-control", @style = "width:230px;height:36px" })
+                @Html.ValidationMessageFor(model => model.Artist, "", new { @class = "text-danger" })
+            </div>
+
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="input-group">
+                
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @style = "width:230px;height:36px" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Genre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="input-group" style="width:230px">
+                <select id="Genre" data-toggle="select" class="form-control select select-default" name="Genre">
+                    <option value="default" selected="selected">--Please select--</option>
+                    @{
+                        var Genrelist = ViewBag.Genre as List<Demo.Domain.GenreViewModel>;
+                        if (Genrelist != null && Genrelist.Count > 0)
+                        {
+                            foreach (var item in Genrelist)
+                            {
+                                <option value="@item.Name">
+                                    @item.Name
+                                </option>
+                            }
+
+                        }
+                    }
+
+
+                </select>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="input-group">
+               
+                @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @style = "width:230px;height:36px" })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+
+
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PublicDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="input-group" style="width:450px">
+                <img id="1" style="cursor: pointer;" onclick="WdatePicker({el:'d2'})" src="../images/calendar.png">
+                @Html.TextBoxFor(model => model.PublicDate, new { id = "d2", onclick = "WdatePicker();", type = "text", placeholder = "mm/dd/yyyy", autocomplete = "off", @class = "form-control", @style = "width:200px" })
+            </div>
+            @Html.ValidationMessageFor(model => model.PublicDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <label style="color:red">@ViewBag.Msg</label>
+        </div>
+    </div>
+}
+    <div>
+       
+        @Html.ActionLink("Back", "Store")
+    </div>
+
+

@@ -1,0 +1,65 @@
+﻿
+.nodata {
+    margin-left:5px;
+}
+
+.rowHeight {
+   margin-bottom:60px;
+}
+
+.textInfo {
+    font-size:1.1em;
+}
+
+.textInfo2 {
+    font-size:1.5em;
+       /*color: #3498db;*/
+}
+.textInfo3 {
+    font-size:1.2em;
+       /*color: #3498db;*/
+}
+
+.textInfo4 {
+        color: #36769C;
+        font-size: 16px;
+        height: 36px;
+        line-height: 36px;
+        overflow: hidden;
+    }
+
+.jobTitle-Info {
+    background-color:#FFF; 
+    border:none;
+    overflow-y:hidden;
+    overflow-x:hidden;
+    font-size:1.0em;
+    margin-left:0px;
+    padding-left:0px;
+}
+
+.HistoryClass {
+     font-size:1.0em;
+       color: #36769C;
+}
+
+.Help_Links{
+    color:#F1C40F;
+    font-size: 14px;
+}
+
+.rowHight { margin-bottom: 10px; }
+
+.rowButton { padding-left:10px;padding-right:20px;}
+
+
+.memberField-box {
+    background-color: #fff;
+    padding: 5px;
+    zoom: 1;
+    max-width: 450px;
+    min-width: 300px;
+    overflow: hidden;
+    margin: 0 0 30px 30px;
+    border: 3px solid #999;
+}

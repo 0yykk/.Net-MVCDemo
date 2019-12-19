@@ -1,0 +1,132 @@
+﻿/* ----------START GLOBAL STYLES------- */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #000000;
+}
+/*td{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+
+}*/
+.bold {
+    font-weight: bold;
+}
+
+.blue {
+    color: #003366;
+}
+
+.bluebold {
+    color: #003366;
+    font-weight: bold;
+}
+
+.dkblue {
+    color: #006699;
+}
+
+.dkbluebold {
+    color: #006699;
+    font-weight: bold;
+}
+
+.red {
+    color: #CC3333;
+}
+
+.redbold {
+    color: #CC3333;
+    font-weight: bold;
+}
+
+.dkred {
+    color: #990000;
+}
+
+.dkredbold {
+    color: #990000;
+    font-weight: bold;
+}
+
+.white {
+    color: #FFFFFF;
+}
+
+.whitebold {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.dkgray {
+    color: #666666;
+}
+
+.dkgraybold {
+    color: #666666;
+    font-weight: bold;
+}
+
+.pink {
+    color: #FF9999;
+}
+
+.yellow {
+    color: #FFF000;
+}
+
+.font10 {
+    font-size: 10px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.font11 {
+    font-size: 11px;
+}
+
+.font13 {
+    font-size: 13px;
+}
+
+.font14 {
+    font-size: 14px;
+}
+
+.font16 {
+    font-size: 16px;
+}
+
+.font17 {
+    font-size: 17px;
+}
+
+.font20 {
+    font-size: 20px;
+}
+
+.font24 {
+    font-size: 24px;
+}
+
+h1 {
+    color: #003366;
+    font-size: 20px;
+}
+
+h2 {
+    color: #003366;
+    font-size: 18px;
+}
+
+h3 {
+    color: #003366;
+    font-size: 16px;
+    margin-top: 10px;
+}

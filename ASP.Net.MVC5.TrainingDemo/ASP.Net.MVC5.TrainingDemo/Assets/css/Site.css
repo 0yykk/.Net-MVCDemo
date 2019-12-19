@@ -1,0 +1,287 @@
+﻿body {
+    /*padding-top: 50px;
+     background: url("../assets/img/bg_cartoon_sky2.jpg") no-repeat center bottom;
+     background-size: cover;*/
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+#cloneconfigurationModal .modal-content {
+    text-align: center;
+    padding: 0!important;
+    width: 700px !important;
+    height: auto !important;
+}
+
+.modal:before {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.LoadingSpinner {
+    width: 25px;
+    height: 25px;
+}
+
+.dl-horizontal {
+font-size: large
+}
+
+.center-grid-text {
+    text-align: center;
+}
+
+.pagination li {
+    display: inline;
+        padding: 3px;
+    text-align: center;
+
+}
+
+.modal-link {
+    
+}
+
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: grey;         /* adjust as needed */
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}
+
+.bs-callout {
+    padding: 15px;
+    margin: 5px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    display: block;
+    width:100%;
+    white-space:nowrap;
+}
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-default {
+    border-left-color: #777;
+}
+.bs-callout-default h4 {
+    color: #777;
+}
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+.bs-callout-info {
+    border-left-color: #5bc0de;
+}
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+
+#configurationAccordion {
+    max-height: 500px
+}
+
+#HealthCallouts {
+
+}
+
+.PandaCore-Content {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    height: 100%;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+    .PandaCore-content .content-header {
+        height: 75px;
+    }
+
+    .PandaCore-content .content-nav {
+        background-color: #ffffff;
+        height: 50px;
+    }
+
+    .PandaCore-content .content-body {
+        padding: 25px;
+    }
+
+        .PandaCore-content .content-body.body-full {
+            height: 100%;
+            padding: 0;
+        }
+
+.jumbotron.bg-gears-color {
+background: url("../img/bg_gears_color_blue.jpg") no-repeat center center;
+background-size: cover;
+color:#FFF;
+margin-bottom:18px;
+}
+
+.jumbotron {
+    margin: 0;
+    background:none; 
+
+}
+.jumbotron.bg-store01 {
+background: url("../img/bg_store01.png") no-repeat center center;
+background-size: cover;
+}
+
+.jumbotron.bg-store01-color {
+background: url("../img/bg_store01_color.png") no-repeat center center;
+background-size: cover;
+}
+
+.bg_cartoon_sky {
+    background: url("../img/bg_cartoon_sky3.jpg") no-repeat center bottom;
+     background-size: cover;
+
+}
+
+.bg_cartoon_sky_home {
+    background: url("../img/bg_cartoon_sky4.jpg") no-repeat center top;
+     background-size: cover;
+
+}
+
+.bg_check_mark {
+    background: url("../img/checkmark.png") no-repeat center bottom;
+     background-size: cover;
+
+}
+
+.ls-5 {
+    line-height: 5px;
+}
+
+
+
+
+
+@media only screen and (max-width: 1020px) {
+    .jumbotron.bg_cartoon_sky {
+    background: none;
+    padding:0px;
+    margin:0;
+    }
+    .remove_background{display:none}
+
+}
+
+.vertical-line {
+    width: 2.5px;
+    max-height: 500px;
+}
+
+.margin-left-5{
+    margin-left: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+    .remove-image-home{
+        display: none;
+    }
+}
+
+
+@media only screen and (max-width: 500px) {
+    .desktopColumn {
+        display: none;
+    }
+}
+
+/* Overide Main Content Header */
+
+/* Small Tablet View  */
+@media only screen and (max-width: 660px) {
+
+    .main-content .content-header h1 {
+        font-size: 22px;
+    }
+
+}
+
+/* Phone View */
+@media only screen and (max-width: 600px) {
+    .main-content .content-header h1 {
+        font-size: 14px;
+    }
+}
+
+/* Small Phone View (iPhone SE) */
+@media only screen and (max-width: 350px) {
+    .main-content .content-header h1 {
+        font-size: 12px;
+    }
+
+}
+
+

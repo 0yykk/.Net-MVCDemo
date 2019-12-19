@@ -1,0 +1,62 @@
+﻿
+ #div_loading {
+     background-color: gray;
+     position: fixed;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+     opacity: 0.5;
+
+      /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=50);
+
+  /* Netscape */
+  -moz-opacity: 0.5;
+
+  /* Safari 1.x */
+  -khtml-opacity: 0.5;
+
+  /* Good browsers */
+  opacity: 0.5;
+
+     /*filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);*/
+     /*opacity: 0.5;*/
+}
+
+  #div_wait 
+  {
+     background-color: gray;
+     position: fixed;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+     opacity: 0.5;
+
+      /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=50);
+
+  /* Netscape */
+  -moz-opacity: 0.5;
+
+  /* Safari 1.x */
+  -khtml-opacity: 0.5;
+
+  /* Good browsers */
+  opacity: 0.5;
+
+     /*filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);*/
+     /*opacity: 0.5;*/
+}
+

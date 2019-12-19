@@ -1,0 +1,108 @@
+﻿#adsearch
+{
+    padding: 10px;
+    border: 1px solid #CCC;
+    margin-bottom: 5px;
+}
+#adsearch p
+{
+    text-align: right;
+}
+.searchbar
+{
+    width: 99%;
+}
+.searchbar td, .searchbar td
+{
+    padding: 5px;
+}
+.searchbar th
+{
+    text-align: right; /*width: 13%;*/
+    white-space: nowrap;
+}
+.searchbar td
+{
+    text-align: left; /*width: 20%;*/
+    white-space: nowrap;
+}
+.searchbar td .datepicker
+{
+    width: 120px;
+}
+
+.vessellist p .datepicker
+{
+    width: 120px;
+}
+.searchbar td input[type=text]
+{
+    width:120px;
+}
+
+.table
+{
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #CCC;
+}
+.table tr:nth-child(even)
+{
+    background-color: #efe;
+}
+.table th
+{
+    text-align: center;
+    background-color: #EFEFEF;
+}
+.table th, .table td
+{
+    border-right: 1px solid #d5e3e7;
+    border-bottom: 1px solid #d5e3e7;
+    line-height: 22px;
+    text-align: center;
+}
+.table td, .table th
+{
+    padding: 4px 5px;
+    font-weight: normal;
+}
+.table td img
+{
+    border: 0;
+    margin-left: 3px;
+    margin-right: 5px;
+}
+.orange
+{
+    color: Orange;
+}
+
+.pager
+{
+    padding: 5px;
+    text-align: center;
+    background-color: #f5f5fd;
+}
+.pager > p
+{
+    display: inline;
+    margin-right: 20px;
+}
+.pager > a
+{
+    color: #666666;
+    text-decoration: none;
+    margin: 0 2px 0 2px;
+}
+.pager > a.selected
+{
+    color: Orange;
+}
+select, input[type=text]
+{
+    min-width: 100px;
+}
+.selected {
+     color: Orange;
+}

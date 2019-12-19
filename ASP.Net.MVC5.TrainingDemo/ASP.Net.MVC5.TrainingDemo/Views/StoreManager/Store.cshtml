@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "Store";
+}
+@model Demo.Domain.AlbumViewModel
+<link href="~/Content/jquery.ui.autocomplete.css" rel="stylesheet" />
+<link href="~/Scripts/bootstrap_3.3.5.min.js" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<!-- JS, AutoComplete -->
+<script src="~/Scripts/jquery.autocomplete.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+<script src="~/Scripts/autocompleteCommon.js"></script>
+<script src="~/Scripts/CustomerizedJS/otpremuim.js"></script>
+<link href="~/Content/DivLoading.css" rel="stylesheet" />
+<div id="div_loading" style="display:none;"></div>
+
+<style type="text/css">
+
+    #tableSort {
+        moz-user-select: -moz-none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        text-align: center;
+        margin: 15px 0;
+    }
+
+        #tableSort th {
+            cursor: pointer;
+            background: #D1282e
+        }
+
+        #tableSort tr:nth-child(even) {
+            background: #f9f9f9
+        }
+
+        #tableSort th, #tableSort td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+</style>
+<article class="title-box">
+    <section class="h1">
+        Store
+    </section>
+</article>
+<div style="width:100%">
+
+    @using (Html.BeginForm("Store", "StoreManager", FormMethod.Post))
+    {
+
+
+        <div class="row" style="padding:10px;">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                    <span class="sr-only">100% Complete</span>
+                </div>
+            </div>
+            <div class="col-md-4" style="width:40%">
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-top:10px">Artist:</div>
+                    <div class="col-md-8">
+                        <div class="col-md-8" style="width:260px">
+                            <select id="Artist" data-toggle="select" class="form-control select select-default" name="Artist">
+                                <option value="default" selected="selected">--Please select--</option>
+                                @{
+                                    var Artistlist = ViewBag.Artist as List<Demo.Domain.ArtistViewModel>;
+                                    if (Artistlist != null && Artistlist.Count > 0)
+                                    {
+                                        foreach (var item in Artistlist)
+                                        {
+                                            <option value="@item.Name">
+                                                @item.Name
+                                            </option>
+                                        }
+
+                                    }
+                                }
+
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4" style="width:60%">
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-top:10px">Genre:</div>
+                    <div class="col-md-8" style="width:260px">
+                        <select id="Genre" data-toggle="select" class="form-control select select-default" name="Genre">
+                            <option value="default" selected="selected">--Please select--</option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding:10px;">
+            <div class="col-md-4" style="width:40%">
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-top:10px">Artist:</div>
+                    <div class="col-md-8">
+                        <div class="col-md-8" style="width:260px">
+                            @Html.TextBoxFor(model => model.ArtistId, "", new
+                          {
+                              @class = "form-control autocomplete",
+                              @placeholder = "Enter Artist Name",
+                              @onblur = "javascript: ReplaceSepcialValue(this);"
+                          })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" style="width:60%">
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-top:10px">Date</div>
+                    <div class="col-md-8" style="width:260px">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.PublicDate, htmlAttributes: new { id = "d1", onclick = "WdatePicker();", type = "text", Value = "", autocomplete = "off", @class = "form-control" })
+                            <span class="input-group-btn">
+                                <img width="40" height="42" id="1" style="cursor: pointer;" onclick="WdatePicker({el:'d1'})" src="../images/calendar.png">
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row" style="padding:10px">
+            <div class="col-md-4" style="width:100%">
+                <div class="form-group">
+                    <div class="col-md-2" style="width:30%"></div>
+                    <div class="col-md-4" style="width:20%">
+                        <button id="subSearch" type="submit" class="btn btn-primary btn-block " style="margin-left:10px;width:90px">Search</button>
+                    </div>
+                    <div class="col-md-6" style="width:50%">
+                        <div class="col-md-8">
+                            <a href="@Url.Action("Add", "StoreManager")" class="btn btn-primary btn-block" style="margin-left:10px;width:90px">Create</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

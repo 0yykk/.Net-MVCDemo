@@ -120,7 +120,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StoreManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -135,9 +137,70 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\ajax-loader.gif" />
+    <Content Include="images\background.gif" />
+    <Content Include="images\backgroundTopNav.gif" />
+    <Content Include="images\Book.png" />
+    <Content Include="images\calendar.gif" />
+    <Content Include="images\calendar.png" />
+    <Content Include="images\calendar_dis.png" />
+    <Content Include="images\Compas.png" />
+    <Content Include="images\complete.png" />
+    <Content Include="images\complete_disable.png" />
+    <Content Include="images\epaws_header.gif" />
+    <Content Include="images\epaws_logo.gif" />
+    <Content Include="images\favicon.png" />
+    <Content Include="images\imgHelpButton.gif" />
+    <Content Include="images\logo.footer.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\logo.upgo.png" />
+    <Content Include="images\logoCourse.png" />
+    <Content Include="images\Moment.jpg" />
+    <Content Include="images\nopicture.jpg" />
+    <Content Include="images\NotAuthorized.gif" />
+    <Content Include="images\NotAuthorized2.gif" />
+    <Content Include="images\PandaCare.png" />
+    <Content Include="images\PandaLogo01.png" />
+    <Content Include="images\PandaLogo02.jpg" />
+    <Content Include="images\photo.jpg" />
+    <Content Include="images\register.png" />
+    <Content Include="images\register_disable.png" />
+    <Content Include="images\Retina-Ready.png" />
+    <Content Include="images\search.png" />
+    <Content Include="images\search_disable.png" />
+    <Content Include="images\submit.png" />
+    <Content Include="images\submit_disable.png" />
+    <Content Include="images\UofPLogo.png" />
+    <Content Include="images\Upanda.png" />
+    <Content Include="images\viewPDF.png" />
+    <Content Include="images\wait.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\DatePicker\calendar.js" />
+    <Content Include="Scripts\DatePicker\config.js" />
+    <Content Include="Scripts\DatePicker\developmentTool\lang\en.js" />
+    <Content Include="Scripts\DatePicker\developmentTool\lang\zh-cn.js" />
+    <Content Include="Scripts\DatePicker\developmentTool\lang\zh-tw.js" />
+    <Content Include="Scripts\DatePicker\developmentTool\skin\datePicker.gif" />
+    <Content Include="Scripts\DatePicker\developmentTool\skin\default\datepicker.css" />
+    <Content Include="Scripts\DatePicker\developmentTool\skin\default\img.gif" />
+    <Content Include="Scripts\DatePicker\developmentTool\skin\WdatePicker.css" />
+    <Content Include="Scripts\DatePicker\developmentTool\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\DatePicker\developmentTool\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\DatePicker\developmentTool\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\DatePicker\lang\en.js" />
+    <Content Include="Scripts\DatePicker\lang\zh-cn.js" />
+    <Content Include="Scripts\DatePicker\lang\zh-tw.js" />
+    <Content Include="Scripts\DatePicker\My97DatePicker.htm" />
+    <Content Include="Scripts\DatePicker\skin\datePicker.gif" />
+    <Content Include="Scripts\DatePicker\skin\default\datepicker.css" />
+    <Content Include="Scripts\DatePicker\skin\default\img.gif" />
+    <Content Include="Scripts\DatePicker\skin\WdatePicker.css" />
+    <Content Include="Scripts\DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\DatePicker\WdatePicker.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -162,6 +225,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\StoreManager\Store.cshtml" />
+    <Content Include="Views\StoreManager\Edit.cshtml" />
+    <Content Include="Views\StoreManager\Add.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\WebPage1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -179,6 +248,24 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Demo.Core\Demo.Core.csproj">
+      <Project>{f2a1363c-6e04-42a6-975d-0cce26cebb73}</Project>
+      <Name>Demo.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Demo.Data\Demo.Data.csproj">
+      <Project>{8eec73b9-faa3-4d71-b1da-3d192a57a5d8}</Project>
+      <Name>Demo.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">
+      <Project>{d55c57d7-c0f1-4cc0-906f-df862c8c66cb}</Project>
+      <Name>Demo.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Demo.Provider\Demo.Provider.csproj">
+      <Project>{ff4bcac1-2c14-43eb-a370-226c33c4507c}</Project>
+      <Name>Demo.Provider</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

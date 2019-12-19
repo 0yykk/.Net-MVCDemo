@@ -1,0 +1,7 @@
+﻿@media only screen and (max-width: 991px) {
+
+    .membership .membership-container {
+        background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('~/assets/img/login-bg.jpg') bottom no-repeat;
+        z-index: 99;
+    }
+}

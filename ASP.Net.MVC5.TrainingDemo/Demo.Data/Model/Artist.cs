@@ -12,7 +12,7 @@ namespace Demo.Data.Model
     public class Artist
     {
         [Key]
-        public virtual int ArtistId { get; set; }
-        public virtual string ArtistName { get; set; }
+        public  int ArtistId { get; set; }
+        public  string ArtistName { get; set; }
     }
 }

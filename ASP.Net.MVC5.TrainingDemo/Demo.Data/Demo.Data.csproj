@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\MusicStoreContext.cs" />
+    <Compile Include="DatabaseInitializer\DatabaseSeed.cs" />
     <Compile Include="Model\Album.cs" />
     <Compile Include="Model\Artist.cs" />
     <Compile Include="Model\Genre.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Respositories\AlbumRespository.cs" />
+    <Compile Include="Respositories\GenreRespository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Demo.Domain\Demo.Domain.csproj">
@@ -71,6 +73,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

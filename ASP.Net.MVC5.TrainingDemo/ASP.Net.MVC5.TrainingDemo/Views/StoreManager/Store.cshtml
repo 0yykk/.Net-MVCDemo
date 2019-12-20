@@ -157,7 +157,7 @@
                         <th class="td" data-type="string">Genre</th>
                         <th class="td" data-type="string">PublishDate</th>
                         <th class="td" data-type="string">Price</th>
-                        <th style="width:300px"></th>
+                        <th style="width:360px"></th>
                     </tr>
                 </thead>
                 <tbody id="scrollRefresh">
@@ -172,10 +172,10 @@
                                     @Html.DisplayFor(modelItem => item.Title)
                                 </td>
                                 <td class="td">
-                                    @Html.DisplayFor(modelItem => item.Artist)
+                                    @Html.DisplayFor(modelItem => item.ArtistName)
                                 </td>
                                 <td class="td">
-                                    @Html.DisplayFor(modelItem => item.Genre)
+                                    @Html.DisplayFor(modelItem => item.GenreName)
                                 </td>
                                 <td class="td">
                                     @Html.DisplayFor(modelItem => item.PublicDate)
@@ -185,8 +185,9 @@
                                 </td>
                                 <td class="td">
                                     <a href="@Url.Action("Edit", "StoreManager", new { id = item.AlbumId, type = "Edit" })" class="btn btn-danger" style="margin-left: 10px;">Edit</a>
-                                    <a href="javascript:void(0)" onclick="deletePerson(@item.AlbumId)" class="btn btn-danger">Delete</a>
+                                    <a href="javascript:void(0)" onclick="deletePerson(@item.AlbumId)" class="btn btn-danger" style="margin-right: 10px;">Delete</a>
                                     <a href="@Url.Action("Order", "Cart", new { id = item.AlbumId, type = "Buy" })" class="btn btn-danger" style="margin-right: 10px;">Buy</a>
+                                    <a href="@Url.Action("AlbumView", "StoreManager", new { id = item.AlbumId})" class="btn btn-danger" style="margin-right: 10px;">View</a>
                                 </td>
                             </tr>
                         }

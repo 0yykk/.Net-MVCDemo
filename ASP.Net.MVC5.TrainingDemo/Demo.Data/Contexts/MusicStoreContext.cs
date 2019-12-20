@@ -11,7 +11,7 @@ namespace Demo.Data.Contexts
     public interface IMusicStoreContext
     {
         DbSet<Album> Album { get; set; }
-        DbSet<Artist> Artist { get; set; }
+        DbSet<Artist> Artist{ get; set; }
         DbSet<Genre> Genre { get; set; }
         DbSet<Order> Orders{ get; set; }
         DbSet<OrderDetail> OrderDetails { get; set; }
@@ -24,6 +24,7 @@ namespace Demo.Data.Contexts
         public MusicStoreContext() : base("name=TestLogin")
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<MusicStoreContext>());
+            
         }
         public virtual DbSet<Album> Album { get; set; }
         public virtual DbSet<Artist> Artist { get; set; }
@@ -38,10 +39,10 @@ namespace Demo.Data.Contexts
         {
             return this;
         }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            Database.SetInitializer<MusicStoreContext>(null);
-            base.OnModelCreating(modelBuilder);
-        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    Database.SetInitializer<MusicStoreContext>(null);
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }

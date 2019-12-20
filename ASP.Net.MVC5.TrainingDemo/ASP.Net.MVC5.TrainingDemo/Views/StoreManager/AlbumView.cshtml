@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "AlbumView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Demo.Domain.AlbumViewModel
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>AlbumView</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7" style="height:600px; margin-top:30px;">
+            <img width="450" height="450" src="~/images/album.png" class="img-circle" />
+        </div>
+        <div class="col-md-5" style="height:600px;">
+            <div class="panel panel-default" style="margin-top:40px;">
+                <div class="panel-heading">Title</div>
+                <div class="panel-body">
+                    XXXXen
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Artist</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Genre</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">PublishDate</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Price</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-2" style="width:30%"></div>
+        <div class="col-md-4" style="width:20%">
+            <button id="Buy" type="submit" class="btn btn-primary btn-block " style="margin-left:10px;width:90px">Buy</button>
+        </div>
+        <div class="col-md-6" style="width:50%">
+            <div class="col-md-8">
+                <a href="#" class="btn btn-primary btn-block" style="margin-left:10px;width:90px">Cart</a>
+            </div>
+        </div>
+    </div>
+    <div>
+
+        @Html.ActionLink("Back", "Store")
+    </div>
+</div>
+    
+

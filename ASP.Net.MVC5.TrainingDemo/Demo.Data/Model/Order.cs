@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Demo.Data.Model
 {
+    [Table("Order")]
     public class Order
     {
+        
+        [Key]
         public string OrderGuid { get; set; }
         public DateTime OrderDate { get; set; }
         public string UserName { get; set; }
@@ -21,6 +26,6 @@ namespace Demo.Data.Model
         public string Phone { get; set; }
         public string Email { get; set; }
         public int TotalPrice { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
+        public IList<OrderDetail> OrderDetails { get; set; }
     }
 }

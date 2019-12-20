@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ASP.Net.MVC5.TrainingDemo.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,8 @@ namespace ASP.Net.MVC5.TrainingDemo
     {
         protected void Application_Start()
         {
+            ContainerConfig.RegisterComponets();
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

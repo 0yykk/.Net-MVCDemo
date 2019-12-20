@@ -12,9 +12,9 @@ namespace Demo.Data.Model
     public class Genre
     {
         [Key]
-        public virtual int GenreId { get; set; }
-        public virtual string GenreName { get; set; }
-        public virtual string Description { get; set; }
-        public virtual List<Album> Albums { get; set; }
+        public  int GenreId { get; set; }
+        public  string GenreName { get; set; }
+        public  string Description { get; set; }
+        public  IList<Album> Albums { get; set; }
     }
 }

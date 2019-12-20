@@ -77,8 +77,11 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             System.Web.HttpContext.Current.Session["Title"] = album.Title;
             System.Web.HttpContext.Current.Session["GenreName"] = GenreName;
             System.Web.HttpContext.Current.Session["ArtistName"] = ArtistName;
+
+            return View();
         }
 
 
+         
     }
 }

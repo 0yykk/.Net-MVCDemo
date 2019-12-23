@@ -24,10 +24,11 @@ namespace ASP.Net.MVC5.TrainingDemo.App_Start
 
             //Repositories
             builder.RegisterType<AlbumRespository>().As<IAlbumRespository>().InstancePerRequest();
+            builder.RegisterType<GenreRespository>().As<IGenreRespository>().InstancePerRequest();
 
             //Provider
             builder.RegisterType<AlbumProvider>().As<IAlbumProvider>().InstancePerRequest();
-
+            builder.RegisterType<GenreProvider>().As<IGenreProvider>().InstancePerRequest();
             //other
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 

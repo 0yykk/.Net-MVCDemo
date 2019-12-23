@@ -19,6 +19,8 @@ namespace Demo.Data.Respositories
         Task<AlbumViewModel> GetAlbumByTittle(string title);
         Task<List<AlbumViewModel>> GetAlbumByGenre(string genreName);
         Task<List<AlbumViewModel>> GetAlbumByArtist(string artist);
+        Task<AlbumViewModel> GetAlbumById(int id);
+        int DeleteAlbum(int id);
     }
     public class AlbumRespository:IAlbumRespository
     {
@@ -36,7 +38,7 @@ namespace Demo.Data.Respositories
         {
             var AList = new List<AlbumViewModel>();
             
-            var storeProcedureName = "dbo.AllAllbum";
+            var storeProcedureName = "dbo.AllAlbum";
             AList = _dbContext.Database.SqlQuery<AlbumViewModel>(
                 $"{storeProcedureName}"
                 ).ToList();
@@ -45,34 +47,32 @@ namespace Demo.Data.Respositories
         }
         public void UpdateAlbum(AlbumViewModel albumViewModel)
         {
-            var db = new MusicStoreContext();
+            
             var exitAlbum = _db.Album.FirstOrDefault(s => s.AlbumId == albumViewModel.AlbumId);
             if (exitAlbum == null)
             {
-                var AlbumData = new Album()
-                {
-                    AlbumId = Convert.ToInt32(albumViewModel.AlbumId),
-                    Title = albumViewModel.Title,
-                    ArtistName = albumViewModel.ArtistName,
-                    GenreName = albumViewModel.GenreName,
-                    Price = albumViewModel.Price
-                };
-                _db.Album.Add(AlbumData);
-                _dbContext.SaveChanges();
+                var storeProcedureName = "[dbo].[Add_Album]";
+                var Result = _dbContext.Database.SqlQuery<AlbumViewModel>(
+                    $"{storeProcedureName} @Title,@ArtistName,@GenreName,@Price,@PublicDate",
+                    new SqlParameter("@Title", albumViewModel.Title),
+                    new SqlParameter("@ArtistName",albumViewModel.ArtistName),
+                    new SqlParameter("@GenreName",albumViewModel.GenreName),
+                    new SqlParameter("@Price",albumViewModel.Price),
+                    new SqlParameter("@PublicDate",albumViewModel.PublicDate)
+                    ).SingleOrDefault();
             }
             else
             {
-                db.Set<Album>().Attach(exitAlbum);
-                db.Entry(exitAlbum).State = EntityState.Modified;
-
-                exitAlbum.AlbumId = Convert.ToInt32(albumViewModel.AlbumId);
-                exitAlbum.Title = albumViewModel.Title;
-                exitAlbum.ArtistName = albumViewModel.ArtistName;
-                exitAlbum.GenreName = albumViewModel.GenreName;
-                exitAlbum.Price = albumViewModel.Price;
-
-
-                db.SaveChanges();
+                var storeProcedureName = "[dbo].[Update_Album]";
+                var Result = _dbContext.Database.SqlQuery<AlbumViewModel>(
+                    $"{storeProcedureName}@AlbumId,@Title,@ArtistName,@GenreName,@Price,@PublicDate",
+                    new SqlParameter("@AlbumId",albumViewModel.AlbumId),
+                    new SqlParameter("@Title",albumViewModel.Title),
+                    new SqlParameter("@ArtistName",albumViewModel.ArtistName),
+                    new SqlParameter("@GenreName",albumViewModel.GenreName),
+                    new SqlParameter("@Price",albumViewModel.Price),
+                    new SqlParameter("@PublicDate",albumViewModel.PublicDate)
+                    ).SingleOrDefault();
             }
             
         }
@@ -127,6 +127,35 @@ namespace Demo.Data.Respositories
             {
                 return new List<AlbumViewModel>();
             }
+        }
+        public async Task<AlbumViewModel> GetAlbumById(int id)
+        {
+            var album = new AlbumViewModel();
+            var db = new MusicStoreContext();
+            var exitAlbum =await _db.Album.FirstOrDefaultAsync(s => s.AlbumId == id);
+            if (exitAlbum != null)
+            {
+                album.AlbumId = exitAlbum.AlbumId;
+                album.ArtistName = exitAlbum.ArtistName;
+                album.Title = exitAlbum.Title;
+                album.GenreName = exitAlbum.GenreName;
+                album.Price = exitAlbum.Price;
+                album.PublicDate = exitAlbum.PublicDate;
+            }
+            return album;
+        }
+        public int DeleteAlbum(int id)
+        {
+            int returnValue = 0;
+            var model = _db.Album.FirstOrDefault(s => s.AlbumId == id);
+            if (model != null)
+            {
+                _db.Album.Remove(model);
+                _dbContext.SaveChanges();
+                return returnValue;
+            }
+            else
+                return (returnValue = 1);
         }
     }
 }

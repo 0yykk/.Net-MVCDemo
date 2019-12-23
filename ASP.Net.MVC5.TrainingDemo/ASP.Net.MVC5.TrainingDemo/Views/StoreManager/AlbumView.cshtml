@@ -21,10 +21,10 @@
             <img width="450" height="450" src="~/images/album.png" class="img-circle" />
         </div>
         <div class="col-md-5" style="height:600px;">
-            <div class="panel panel-default" style="margin-top:40px;">
+            <div class="panel panel-default">
                 <div class="panel-heading">Title</div>
                 <div class="panel-body">
-                    XXXXen
+                    @Html.TextBoxFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
                     <h3 class="panel-title">Artist</h3>
                 </div>
                 <div class="panel-body">
-                    Panel content
+                    @Html.LabelFor(model => model.ArtistName, htmlAttributes: new { @class = "control-label col-md-2" })
                 </div>
             </div>
 
@@ -42,7 +42,7 @@
                     <h3 class="panel-title">Genre</h3>
                 </div>
                 <div class="panel-body">
-                    Panel content
+                    @Html.LabelFor(model => model.GenreName, htmlAttributes: new { @class = "control-label col-md-2" })
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
                     <h3 class="panel-title">PublishDate</h3>
                 </div>
                 <div class="panel-body">
-                    Panel content
+                    @Html.LabelFor(model => model.PublicDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 </div>
             </div>
 
@@ -60,20 +60,20 @@
                     <h3 class="panel-title">Price</h3>
                 </div>
                 <div class="panel-body">
-                    Panel content
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
                 </div>
             </div>
         </div>
 
     </div>
-    <div class="row">
+    <div class="row" style="margin-top:20px">
         <div class="col-md-2" style="width:30%"></div>
         <div class="col-md-4" style="width:20%">
-            <button id="Buy" type="submit" class="btn btn-primary btn-block " style="margin-left:10px;width:90px">Buy</button>
+            <button id="Buy" type="submit" class="btn btn-danger " style="margin-left:10px;width:90px">Buy</button>
         </div>
         <div class="col-md-6" style="width:50%">
             <div class="col-md-8">
-                <a href="#" class="btn btn-primary btn-block" style="margin-left:10px;width:90px">Cart</a>
+                <a href="#" class="btn btn-danger" style="margin-left:10px;width:90px">Cart</a>
             </div>
         </div>
     </div>

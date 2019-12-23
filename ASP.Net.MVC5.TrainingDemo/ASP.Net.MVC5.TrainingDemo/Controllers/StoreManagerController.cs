@@ -1,4 +1,6 @@
-﻿using Demo.Domain;
+﻿using ASP.Net.MVC5.TrainingDemo.Models;
+using Demo.Core.Utilities;
+using Demo.Domain;
 using Demo.Provider.Provider;
 using System;
 using System.Collections.Generic;
@@ -12,47 +14,109 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
     public class StoreManagerController : Controller
     {
         private readonly IAlbumProvider _albumProvider;
-        //private readonly ISelectListProvider _selectListProvider;
-        public StoreManagerController(IAlbumProvider albumProvider)
+        private readonly IGenreProvider _genreProvider;
+        
+        public StoreManagerController(IAlbumProvider albumProvider,
+            IGenreProvider genreProvider)
         {
             _albumProvider = albumProvider;
-            
+            _genreProvider = genreProvider;
 
         }
         // GET: StoreManager
         public ActionResult Store()
         {
-            
-            var albumList = new List<AlbumViewModel>();
-            albumList = _albumProvider.GetAllAlbum();
-            if(albumList!=null&&albumList.Count>0)
+
+            SetddlGenre();
+            var _albumList = new List<AlbumViewModel>();
+            _albumList = _albumProvider.GetAllAlbum();
+            if (_albumList != null)
             {
-                ViewBag.Album = albumList;
+                ViewBag.Album = _albumList;
+                int pageindex = 1;
+                var recordCount = _albumList.Count();
+                if (Request.QueryString["page"] != null)
+                    pageindex = Convert.ToInt32(Request.QueryString["page"]);
+                const int PAGE_SZ = 10;
+
+                ViewBag.Album = _albumList.OrderByDescending(alb => alb.AlbumId)
+                    .Skip((pageindex - 1) * PAGE_SZ)
+                    .Take(PAGE_SZ).ToList();
+                ViewBag.Paper = new PagerHelper()
+                {
+                    PageIndex = pageindex,
+                    PageSize = PAGE_SZ,
+                    RecordCount = recordCount,
+                };
+            }
+            else
+            {
+                ViewBag.Msg = "There are no data";
             }
             return View();
         }
-        public ActionResult Edit()
+        public async Task<ActionResult> Edit(int id,string type)
         {
-            return View();
+            SetddlGenre();
+            var album = new AlbumViewModel();
+            album =await _albumProvider.GetAlbumById(id);
+            return View(album);
         }
         public ActionResult Add()
         {
+            SetddlGenre();
             return View();
         }
-        public ActionResult AlbumView()
+        public async Task<ActionResult> AlbumView(int id)
         {
-            return View();
+            var album = new AlbumViewModel();
+            album = await _albumProvider.GetAlbumById(id);
+            return View(album);
         }
-        public async void  SetddlGenre()
+        public  void SetddlGenre()
         {
             var GenreList = new List<GenreViewModel>();
+            if (_genreProvider.GetGenreListAsync() != null)
+            {
+                GenreList = _genreProvider.GetGenreListAsync();
+            }
+            ViewBag.GenreList= GenreList;
+        }
+        [HttpPost]
+        public ActionResult Edit(AlbumViewModel album)
+        {
+            _albumProvider.UpdateAlbum(album);
+            return Content("<script>alert('Update Success!');history.go(-1);</script>");
+        }
+        [HttpPost]
+        public ActionResult Add(AlbumViewModel album)
+        {
+            _albumProvider.UpdateAlbum(album);
+            return Content("<script>alert('Add Success!');history.go(-1);</script> ");
+        }
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var result = new DeleteMassage();
+            int returnValue = _albumProvider.DeleteAlbum(id);
+            if (returnValue == 0)
+            {
+                result.IsSuccess = true;
+                result.ErrorMessage = "Delete success!";
+            }
 
+            else
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "The current legion has been deleted!";
+            }
+
+            return Json(result);
         }
         [HttpPost]
         public async Task<ActionResult> Store(AlbumViewModel album)
         {
-            string GenreName = null;
-            string ArtistName = null;
+            string GenreName = null; 
             var _album = new AlbumViewModel();
             var _albumList = new List<AlbumViewModel>();
             if(Request.Form.Count>0)
@@ -61,27 +125,109 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
                 {
                     GenreName = Request.Form.Get("GenreName").ToString();
                 }
-                if (Request.Form.Get("Artist") != "default")
-                {
-                    ArtistName = Request.Form.Get("GenreName").ToString();
-                }
+
             }
             else
             {
                 if (Session["GenreName"] != null)
                     GenreName = Session["GenreName"].ToString();
-                if (Session["ArtistName"] != null)
-                    ArtistName = Session["ArtistName"].ToString();
             }
 
             System.Web.HttpContext.Current.Session["Title"] = album.Title;
             System.Web.HttpContext.Current.Session["GenreName"] = GenreName;
-            System.Web.HttpContext.Current.Session["ArtistName"] = ArtistName;
+            System.Web.HttpContext.Current.Session["ArtistName"] = album.ArtistName;
 
+            string title = album.Title;
+            string ArtistName = album.ArtistName;
+            if (title != null && GenreName == null && ArtistName == null)
+            {
+                album = await _albumProvider.GetAlbumByTittle(title);
+                if (album != null)
+                { 
+                    ViewBag.Album = _albumList;
+                    int pageindex = 1;
+                    var recordCount = _albumList.Count();
+                    if (Request.QueryString["page"] != null)
+                        pageindex = Convert.ToInt32(Request.QueryString["page"]);
+                    const int PAGE_SZ = 10;
+
+                    ViewBag.Album = _albumList.OrderByDescending(art => art.AlbumId)
+                       .Skip((pageindex - 1) * PAGE_SZ)
+                       .Take(PAGE_SZ).ToList();
+                    ViewBag.Pager = new PagerHelper()
+                    {
+                        PageIndex = pageindex,
+                        PageSize = PAGE_SZ,
+                        RecordCount = recordCount,
+                    };
+                }
+                else
+                {
+                    ViewBag.Msg = "There are no data named " + title;
+                }
+            }
+            else if (title == null && GenreName != null&& ArtistName == null)
+            {
+                _albumList = await _albumProvider.GetAlbumByGenre(GenreName);
+                if (album != null)
+                {
+                    ViewBag.Album = _albumList;
+                    int pageindex = 1;
+                    var recordCount = _albumList.Count();
+                    if (Request.QueryString["page"] != null)
+                        pageindex = Convert.ToInt32(Request.QueryString["page"]);
+                    const int PAGE_SZ = 10;
+
+                    ViewBag.Album = _albumList.OrderByDescending(art => art.AlbumId)
+                       .Skip((pageindex - 1) * PAGE_SZ)
+                       .Take(PAGE_SZ).ToList();
+                    ViewBag.Pager = new PagerHelper()
+                    {
+                        PageIndex = pageindex,
+                        PageSize = PAGE_SZ,
+                        RecordCount = recordCount,
+                    };
+                }
+                else
+                {
+                    ViewBag.Msg = "There are no data named " + GenreName;
+                }
+
+            }
+            else if (title == null && GenreName == null && ArtistName != null)
+            {
+                _albumList = await _albumProvider.GetAlbumByArtist(ArtistName);
+                if (album != null)
+                {
+                    ViewBag.Album = _albumList;
+                    int pageindex = 1;
+                    var recordCount = _albumList.Count();
+                    if (Request.QueryString["page"] != null)
+                        pageindex = Convert.ToInt32(Request.QueryString["page"]);
+                    const int PAGE_SZ = 10;
+
+                    ViewBag.Album = _albumList.OrderByDescending(art => art.AlbumId)
+                       .Skip((pageindex - 1) * PAGE_SZ)
+                       .Take(PAGE_SZ).ToList();
+                    ViewBag.Pager = new PagerHelper()
+                    {
+                        PageIndex = pageindex,
+                        PageSize = PAGE_SZ,
+                        RecordCount = recordCount,
+                    };
+                }
+                else
+                {
+                    ViewBag.Msg = "There are no data named " + ArtistName;
+                }
+
+            }
+            else
+            {
+                return Redirect("Store");
+            }
+            SetddlGenre();
             return View();
         }
-
-
-         
     }
 }

@@ -84,9 +84,20 @@
                 <div class="form-group">
                     <div class="col-md-4" style="margin-top:10px">Genre:</div>
                     <div class="col-md-8" style="width:260px">
-                        <select id="Genre" data-toggle="select" class="form-control select select-default" name="Genre">
+                        <select id="GenreName" data-toggle="select" class="form-control select select-default" name="GenreName">
                             <option value="default" selected="selected">--Please select--</option>
-                            <option value=""></option>
+                            @{ 
+                                var Genrelist = ViewBag.GenreList as List<Demo.Domain.GenreViewModel>;
+                                if (Genrelist != null && Genrelist.Count > 0)
+                                {
+                                    foreach(var item in Genrelist)
+                                    {
+                                        <option value="@item.GenreName">
+                                            @item.GenreName
+                                        </option>
+                                    }
+                                }
+                            }
                         </select>
                     </div>
                 </div>
@@ -98,7 +109,7 @@
                     <div class="col-md-4" style="margin-top:10px">Artist:</div>
                     <div class="col-md-8">
                         <div class="col-md-8" style="width:260px">
-                            @Html.TextBoxFor(model => model.ArtistId, "", new
+                            @Html.TextBoxFor(model => model.ArtistName, "", new
                           {
                               @class = "form-control autocomplete",
                               @placeholder = "Enter Artist Name",
@@ -209,4 +220,23 @@
 
     </div>
 </div>
+<script>
+     function deletePerson(id) {
+        debugger;
+        if (confirm("Are you sure you want to delete it?")) {
+
+                $.post("@Url.Action("Delete", "StoreManager")", { Id: id }, function (data) {
+
+                    if (data.IsSuccess) {
+                        location.reload();
+                        alert(data.ErrorMessage);
+                    }
+                    else {
+                        alert(data.ErrorMessage);
+                    }
+
+                }, "json");
+            }
+    }
+</script>
 

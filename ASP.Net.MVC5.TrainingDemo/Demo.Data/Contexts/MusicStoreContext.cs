@@ -39,10 +39,5 @@ namespace Demo.Data.Contexts
         {
             return this;
         }
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    Database.SetInitializer<MusicStoreContext>(null);
-        //    base.OnModelCreating(modelBuilder);
-        //}
     }
 }

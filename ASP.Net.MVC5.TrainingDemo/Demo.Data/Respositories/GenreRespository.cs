@@ -11,7 +11,7 @@ namespace Demo.Data.Respositories
 {
     public interface IGenreRespository
     {
-        Task<List<GenreViewModel>> GetGenreListAsync();
+        List<GenreViewModel>GetGenreListAsync();
     }
     public class GenreRespository:IGenreRespository
     {
@@ -24,15 +24,15 @@ namespace Demo.Data.Respositories
             _dbContext = _db.GetDbContext();
         }
 
-        public async Task<List<GenreViewModel>> GetGenreListAsync()
+        public  List<GenreViewModel> GetGenreListAsync()
         {
             var storeProcedureName = "[dbo].[GetGenreList]";
             var result = new List<GenreViewModel>();
             try
             {
-                result = await _dbContext.Database.SqlQuery<GenreViewModel>(
+                result =  _dbContext.Database.SqlQuery<GenreViewModel>(
                 $"{storeProcedureName}"
-                ).ToListAsync();
+                ).ToList();
                 return result == null ? null : result;
             }
             catch(Exception ex)

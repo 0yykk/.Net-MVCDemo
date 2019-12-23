@@ -11,109 +11,109 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>@ViewBag.Type Album</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>@ViewBag.Type Album</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.AlbumId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.AlbumId, htmlAttributes: new { @style = "width:230px;height:34px;background:#CCCCCC", @readonly = "readonly" })
-            @Html.ValidationMessageFor(model => model.AlbumId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ArtistName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="input-group">
-                
-                @Html.TextBoxFor(model => model.ArtistName, new { @class = "form-control", @style = "width:230px;height:36px" })
-                @Html.ValidationMessageFor(model => model.ArtistName, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.AlbumId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.AlbumId, htmlAttributes: new { @style = "width:230px;height:34px;background:#CCCCCC", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.AlbumId, "", new { @class = "text-danger" })
             </div>
-
-
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="input-group">
-                
-                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @style = "width:230px;height:36px" })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ArtistName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group">
+
+                    @Html.TextBoxFor(model => model.ArtistName, new { @class = "form-control", @style = "width:230px;height:36px" })
+                    @Html.ValidationMessageFor(model => model.ArtistName, "", new { @class = "text-danger" })
+                </div>
+
+
             </div>
-
-
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.GenreName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="input-group" style="width:230px">
-                <select id="Genre" data-toggle="select" class="form-control select select-default" name="Genre">
-                    <option value="default" selected="selected">--Please select--</option>
-                    @{
-                        var Genrelist = ViewBag.Genre as List<Demo.Domain.GenreViewModel>;
-                        if (Genrelist != null && Genrelist.Count > 0)
-                        {
-                            foreach (var item in Genrelist)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group">
+
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @style = "width:230px;height:36px" })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+
+
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.GenreName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group" style="width:230px">
+                    <select id="GenreName" data-toggle="select" class="form-control select select-default" name="GenreName">
+                        <option value="default" selected="selected">--Please select--</option>
+                        @{
+                            var Genrelist = ViewBag.GenreList as List<Demo.Domain.GenreViewModel>;
+                            if (Genrelist != null && Genrelist.Count > 0)
                             {
-                                <option value="@item.Name">
-                                    @item.Name
-                                </option>
+                                foreach (var item in Genrelist)
+                                {
+                                    <option value="@item.GenreName">
+                                        @item.GenreName
+                                    </option>
+                                }
+
                             }
-
                         }
-                    }
 
 
-                </select>
+                    </select>
+                </div>
+
+
             </div>
-
-
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="input-group">
-               
-                @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @style = "width:230px;height:36px" })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group">
+
+                    @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @style = "width:230px;height:36px" })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                </div>
+
+
             </div>
-
-
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.PublicDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="input-group" style="width:450px">
-                <img id="1" style="cursor: pointer;" onclick="WdatePicker({el:'d2'})" src="../images/calendar.png">
-                @Html.TextBoxFor(model => model.PublicDate, new { id = "d2", onclick = "WdatePicker();", type = "text", placeholder = "mm/dd/yyyy", autocomplete = "off", @class = "form-control", @style = "width:200px" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PublicDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group" style="width:450px">
+                    <img id="1" style="cursor: pointer;" onclick="WdatePicker({el:'d2'})" src="~/images/calendar.png">
+                    @Html.TextBoxFor(model => model.PublicDate, new { id = "d2", onclick = "WdatePicker();", type = "text", placeholder = "mm/dd/yyyy", autocomplete = "off", @class = "form-control", @style = "width:200px" })
+                </div>
+                @Html.ValidationMessageFor(model => model.PublicDate, "", new { @class = "text-danger" })
             </div>
-            @Html.ValidationMessageFor(model => model.PublicDate, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Submit" class="btn btn-default" />
-        </div>
-    </div>
-</div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <label style="color:red">@ViewBag.Msg</label>
         </div>
     </div>
 }
-    <div>
-       
-        @Html.ActionLink("Back", "Store")
-    </div>
+<div>
+
+    @Html.ActionLink("Back", "Store")
+</div>
 
 

@@ -11,6 +11,7 @@
 <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
 <script src="~/Scripts/autocompleteCommon.js"></script>
 <script src="~/Scripts/CustomerizedJS/otpremuim.js"></script>
+
 <link href="~/Content/DivLoading.css" rel="stylesheet" />
 <div id="div_loading" style="display:none;"></div>
 
@@ -46,6 +47,30 @@
             padding: 10px;
             border: 1px solid #ccc;
         }
+
+    #msg {
+        position: fixed;
+        top: 300px;
+        right: 35px;
+        z-index: 10000;
+        width: 1px;
+        height: 52px;
+        line-height: 52px;
+        font-size: 20px;
+        text-align: center;
+        color: #fff;
+        background: #360;
+        display: none
+    }
+
+    .u-flyer {
+        display: block;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        position: fixed;
+        z-index: 9999;
+    }
 </style>
 <article class="title-box">
     <section class="h1">
@@ -86,11 +111,11 @@
                     <div class="col-md-8" style="width:260px">
                         <select id="GenreName" data-toggle="select" class="form-control select select-default" name="GenreName">
                             <option value="default" selected="selected">--Please select--</option>
-                            @{ 
+                            @{
                                 var Genrelist = ViewBag.GenreList as List<Demo.Domain.GenreViewModel>;
                                 if (Genrelist != null && Genrelist.Count > 0)
                                 {
-                                    foreach(var item in Genrelist)
+                                    foreach (var item in Genrelist)
                                     {
                                         <option value="@item.GenreName">
                                             @item.GenreName
@@ -124,7 +149,7 @@
                     <div class="col-md-4" style="margin-top:10px">Date</div>
                     <div class="col-md-8" style="width:260px">
                         <div class="input-group">
-                            @Html.TextBoxFor(model => model.PublicDate, htmlAttributes: new { id = "d1", onclick = "WdatePicker();", type = "text", Value = "", autocomplete = "off", @class = "form-control" })
+                            @Html.TextBoxFor(model => model.PublicDate, htmlAttributes: new { id = "Date", onclick = "WdatePicker();", type = "text", Value = "", autocomplete = "off", @class = "form-control" })
                             <span class="input-group-btn">
                                 <img width="40" height="42" id="1" style="cursor: pointer;" onclick="WdatePicker({el:'d1'})" src="../images/calendar.png">
                             </span>
@@ -196,8 +221,8 @@
                                 </td>
                                 <td class="td">
                                     <a href="@Url.Action("Edit", "StoreManager", new { id = item.AlbumId, type = "Edit" })" class="btn btn-danger" style="margin-left: 10px;">Edit</a>
-                                    <a href="javascript:void(0)" onclick="deletePerson(@item.AlbumId)" class="btn btn-danger" style="margin-right: 10px;">Delete</a>
-                                    <a href="@Url.Action("Order", "Cart", new { id = item.AlbumId, type = "Buy" })" class="btn btn-danger" style="margin-right: 10px;">Buy</a>
+                                    <a href="javascript:void(0)" onclick="deleteAlbum(@item.AlbumId)" class="btn btn-danger" style="margin-right: 10px;">Delete</a>
+                                    <a href="javascript:void(0)" onclick="BuyAlbum(@item.AlbumId,'@item.Title','@item.ArtistName','@item.GenreName','@item.Price')" class="btn btn-danger addcart" style="margin-right: 10px;">Buy</a>
                                     <a href="@Url.Action("AlbumView", "StoreManager", new { id = item.AlbumId})" class="btn btn-danger" style="margin-right: 10px;">View</a>
                                 </td>
                             </tr>
@@ -220,8 +245,10 @@
 
     </div>
 </div>
+
+<div id="msg">Add Cart Success！</div>
 <script>
-     function deletePerson(id) {
+     function deleteAlbum(id) {
         debugger;
         if (confirm("Are you sure you want to delete it?")) {
 
@@ -238,5 +265,92 @@
                 }, "json");
             }
     }
+    function BuyAlbum(id,title,artist,genre,price) {
+        debugger;
+        
+        addRow(id,title,artist,genre,price);
+        var offset = $("#end").offset();
+        var img = "../images/favicon.png";
+        var flyer = $('<img class="u-flyer" src="' + img + '">');
+        flyer.fly({
+            start: {
+                left: event.pageX,
+                top: event.pageY
+            },
+            end: {
+                left: offset.left + 10,
+                top: offset.top + 10,
+                width: 0,
+                height: 0
+            },
+            onEnd: function () {
+                $("#msg").show().animate({ width: '250px' }, 200).fadeOut(1000);
+                
+
+            }
+        });
+
+    }
+    function addRow(id,title,artist,genre,price) {
+        debugger;
+        var table = document.getElementById("cartTable");
+        var tb = document.getElementById("ctbody");
+        var i = tb.childElementCount;
+        var row;  
+        row = table.insertRow();
+        var cell1 = row.insertCell(0); 
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        var cell7 = row.insertCell(6);
+        var cell8 = row.insertCell(7);
+        var e1 = document.createElement("input");
+        e1.type ="checkbox"
+        e1.name = "cell1name" + i;
+        var e2 = document.createElement("label");
+        e2.type = "text";
+        e2.name = "cell2name" + i;
+        e2.innerText = id;
+        var e3 = document.createElement("label");
+        e3.type = "text";
+        e3.name = "cell3name" + i;
+        e3.innerText = title;
+        var e4 = document.createElement("label");
+        e4.type = "text";
+        e4.name = "cell4name" + i;
+        e4.innerText = artist;
+        var e5 = document.createElement("label");
+        e5.type = "text";
+        e5.name = "cell5name" + i;
+        e5.innerText = genre;
+        var e6 = document.createElement("label");
+        e6.type = "text";
+        e6.name = "cell6name" + i
+        e6.innerText =price;
+        var e7 = document.createElement("div");  
+        e7.name = "cell7name" + i;
+        e7.className = "input-group input-group-sm";
+        e7.style.cssText = "width: 130px";
+        e7.innerHTML ="<span class='input-group-addon' id='sizing-addon2' style='width: 30px'>Count</span>"+
+            "<input type='number' class='form-control alert-warning input-sm' min='1' value='1'/>";
+        var e8 = document.createElement("div");
+        e8.name = "cell8name" + i
+
+        e8.innerHTML = "<button type='button' class='btn btn-danger btn-sm' onclick='del(this)'>Delete</button>";
+        cell1.appendChild(e1);
+        cell2.appendChild(e2);
+        cell3.appendChild(e3);
+        cell4.appendChild(e4);
+        cell5.appendChild(e5);
+        cell6.appendChild(e6);
+        cell7.appendChild(e7);
+        cell8.appendChild(e8);
+    }
+    function del($this) {
+        $($this).parent().parent().parent().remove(); 
+    }
+
 </script>
 

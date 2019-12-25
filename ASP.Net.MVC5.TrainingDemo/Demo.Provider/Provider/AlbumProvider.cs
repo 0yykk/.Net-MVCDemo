@@ -16,6 +16,7 @@ namespace Demo.Provider.Provider
         Task<List<AlbumViewModel>> GetAlbumByGenre(string genreName);
         Task<List<AlbumViewModel>> GetAlbumByArtist(string artist);
         Task<AlbumViewModel> GetAlbumById(int id);
+        Task<List<AlbumViewModel>> GetAlbumByDate(DateTime date);
         int DeleteAlbum(int id);
     }
     public class AlbumProvider:IAlbumProvider
@@ -46,6 +47,19 @@ namespace Demo.Provider.Provider
             catch(Exception ex)
             {
                 return new AlbumViewModel();
+            }
+        }
+        public async Task<List<AlbumViewModel>> GetAlbumByDate(DateTime date)
+        {
+            try
+            {
+                var alist = new List<AlbumViewModel>();
+                alist = await _albumRespository.GetAlbumByDate(date);
+                return alist;
+            }
+            catch(Exception ex)
+            {
+                return new List<AlbumViewModel>();
             }
         }
         public async Task<List<AlbumViewModel>> GetAlbumByGenre(string genreName)

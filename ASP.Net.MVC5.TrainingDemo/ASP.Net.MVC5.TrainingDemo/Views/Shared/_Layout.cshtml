@@ -10,7 +10,8 @@
     <link href="~/Content/flat-ui.css" rel="stylesheet" />
     <link href="~/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/app.css" type="text/css" />
-    <link rel="stylesheet" href="~/Content/appCommon.css" type="text/css" />  
+    <link rel="stylesheet" href="~/Content/appCommon.css" type="text/css" /> 
+    
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 </head>
 <body>
@@ -28,15 +29,84 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Store", "Store", "StoreManager")</li>
-                    <li>@Html.ActionLink("Add Album", "Add", "StoreManager")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Login", "Login", "Account")</li>
                     <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                    <li>
+                        <a id="onmodal" style="height:40px" onclick="OnShow();" class="btn-link glyphicon glyphicon-shopping-cart">
+                            <i id="end"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel" style="text-align:center">Shopping Cart</h4>
+                </div>
+                <div class="modal-body">
+                    <label id="123"></label>
+                    <table class="table table-hover table-striped" id="cartTable">
+                        <thead>
+                        <thead>
+                            <tr>
+                                <th class="td">#</th>
+                                <th class="td" data-type="num">AlbumID</th>
+                                <th class="td" data-type="string">Title</th>
+                                <th class="td" data-type="string">Artist</th>
+                                <th class="td" data-type="string">Genre</th>
+                                <th class="td" data-type="string">Price</th>
+                                <th class="td" data-type="string">Count</th>
+                                <th class="td" data-type="string"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="ctbody">
+                            @*<tr id="1">
+                                    <td id="chebox">
+                                        <input name="Album1" class="checkbox" type="checkbox" />
+                                    </td>
+                                    <td>
+                                        The Who
+                                    </td>
+                                    <td>
+                                        The Who
+                                    </td>
+                                    <td>
+                                        The Who
+                                    </td>
+                                    <td>
+                                        The Who
+                                    </td>
+                                    <td>
+                                        The Who
+                                    </td>
+                                    <td>
+                                        <div class="input-group input-group-sm" style="width:130px">
+                                            <span class="input-group-addon" id="sizing-addon3" style="width:30px">Count</span>
+                                            <input type="number" class="form-control alert-warning input-sm" min="1" value="1"/>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                    </td>
+                                </tr>*@
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="cartSubmit">Submit</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+
+    </div>
+
     <div id="header" class="container body-content">
         @RenderBody()
         <hr />
@@ -66,6 +136,8 @@
     <script src="~/Scripts/DatePicker/WdatePicker.js"></script>
     <script src="~/Scripts/CustomerizedJS/ValidateCommon.js"></script>
     <script src="~/Scripts/DatePicker/WdatePicker.js"></script>
-    
+    <script src="~/Scripts/fly.js"></script>
+    <script src="~/Scripts/OnShow.js"></script>
+    <script src="~/Scripts/cartTableJS.js"></script>
 </body>
 </html>

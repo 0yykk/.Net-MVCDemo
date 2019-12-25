@@ -24,7 +24,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Title</div>
                 <div class="panel-body">
-                    @Html.TextBoxFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DisplayFor(model=>model.Title)
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
                     <h3 class="panel-title">Artist</h3>
                 </div>
                 <div class="panel-body">
-                    @Html.LabelFor(model => model.ArtistName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DisplayFor(model=>model.ArtistName)
                 </div>
             </div>
 
@@ -42,7 +42,7 @@
                     <h3 class="panel-title">Genre</h3>
                 </div>
                 <div class="panel-body">
-                    @Html.LabelFor(model => model.GenreName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DisplayFor(model => model.GenreName)
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
                     <h3 class="panel-title">PublishDate</h3>
                 </div>
                 <div class="panel-body">
-                    @Html.LabelFor(model => model.PublicDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DisplayFor(model => model.PublicDate)
                 </div>
             </div>
 
@@ -60,7 +60,8 @@
                     <h3 class="panel-title">Price</h3>
                 </div>
                 <div class="panel-body">
-                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DisplayFor(model => model.Price)
+                    @Html.Label("$")
                 </div>
             </div>
         </div>

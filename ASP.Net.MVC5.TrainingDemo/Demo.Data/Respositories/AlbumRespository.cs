@@ -20,6 +20,7 @@ namespace Demo.Data.Respositories
         Task<List<AlbumViewModel>> GetAlbumByGenre(string genreName);
         Task<List<AlbumViewModel>> GetAlbumByArtist(string artist);
         Task<AlbumViewModel> GetAlbumById(int id);
+        Task<List<AlbumViewModel>> GetAlbumByDate(DateTime date);
         int DeleteAlbum(int id);
     }
     public class AlbumRespository:IAlbumRespository
@@ -44,6 +45,16 @@ namespace Demo.Data.Respositories
                 ).ToList();
            
             return (AList==null)?null:AList;
+        }
+        public async Task<List<AlbumViewModel>> GetAlbumByDate(DateTime date)
+        {
+            var Alist = new List<AlbumViewModel>();
+            var storeProcedureName = "[dbo].[SelectAlbumByDate]";
+            Alist = await _dbContext.Database.SqlQuery<AlbumViewModel>(
+                $"{storeProcedureName} @date",
+                new SqlParameter("@date", date)
+                ).ToListAsync();
+            return (Alist == null) ? null : Alist;
         }
         public void UpdateAlbum(AlbumViewModel albumViewModel)
         {

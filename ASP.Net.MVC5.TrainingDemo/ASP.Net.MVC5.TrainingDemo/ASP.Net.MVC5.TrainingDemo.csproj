@@ -146,6 +146,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartListView.cs" />
     <Compile Include="Models\DeleteMassage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -196,9 +197,9 @@
     <Content Include="images\Upanda.png" />
     <Content Include="images\viewPDF.png" />
     <Content Include="images\wait.gif" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\cartTableJS.js" />
     <Content Include="Scripts\DatePicker\calendar.js" />
     <Content Include="Scripts\DatePicker\config.js" />
     <Content Include="Scripts\DatePicker\developmentTool\lang\en.js" />
@@ -222,8 +223,8 @@
     <Content Include="Scripts\DatePicker\skin\whyGreen\datepicker.css" />
     <Content Include="Scripts\DatePicker\skin\whyGreen\img.gif" />
     <Content Include="Scripts\DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\fly.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -232,6 +233,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\OnShow.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -255,6 +257,7 @@
     <Content Include="Views\Cart\Order.cshtml" />
     <Content Include="Views\Cart\ShoppingDetail.cshtml" />
     <Content Include="Views\StoreManager\AlbumView.cshtml" />
+    <Content Include="Views\Cart\ShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

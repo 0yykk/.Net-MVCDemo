@@ -15,7 +15,24 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
     {
         private readonly IAlbumProvider _albumProvider;
         private readonly IGenreProvider _genreProvider;
-        
+        public List<CartListView> CartList
+        {
+            get
+            {
+                if(Session["CartList"]==null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Session["CartList"] as List<CartListView>;
+                }
+            }
+            set
+            {
+                Session["CartList"] = value;
+            }
+        }
         public StoreManagerController(IAlbumProvider albumProvider,
             IGenreProvider genreProvider)
         {
@@ -26,7 +43,6 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
         // GET: StoreManager
         public ActionResult Store()
         {
-
             SetddlGenre();
             var _albumList = new List<AlbumViewModel>();
             _albumList = _albumProvider.GetAllAlbum();
@@ -59,7 +75,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
         {
             SetddlGenre();
             var album = new AlbumViewModel();
-            album =await _albumProvider.GetAlbumById(id);
+            album = await _albumProvider.GetAlbumById(id);
             return View(album);
         }
         public ActionResult Add()
@@ -69,9 +85,9 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
         }
         public async Task<ActionResult> AlbumView(int id)
         {
-            var album = new AlbumViewModel();
-            album = await _albumProvider.GetAlbumById(id);
-            return View(album);
+            var model = new AlbumViewModel();
+            model = await _albumProvider.GetAlbumById(id);
+            return View(model);
         }
         public  void SetddlGenre()
         {
@@ -81,6 +97,15 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
                 GenreList = _genreProvider.GetGenreListAsync();
             }
             ViewBag.GenreList= GenreList;
+        }
+        [HttpPost]
+        public async Task<ActionResult> BuyAlbum(int id)
+        { 
+            var list = new CartListView();
+            list.AlbumId = id;
+            System.Web.HttpContext.Current.Session["CartList"] = list;
+
+            return View();
         }
         [HttpPost]
         public ActionResult Edit(AlbumViewModel album)
@@ -108,7 +133,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             else
             {
                 result.IsSuccess = false;
-                result.ErrorMessage = "The current legion has been deleted!";
+                result.ErrorMessage = "The current Album has been deleted!";
             }
 
             return Json(result);
@@ -143,7 +168,8 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             {
                 album = await _albumProvider.GetAlbumByTittle(title);
                 if (album != null)
-                { 
+                {
+                    _albumList.Add(album);
                     ViewBag.Album = _albumList;
                     int pageindex = 1;
                     var recordCount = _albumList.Count();
@@ -221,6 +247,33 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
                     ViewBag.Msg = "There are no data named " + ArtistName;
                 }
 
+            }
+            else if(title == null && GenreName == null && ArtistName == null&&album.PublicDate!=null)
+            {
+                _albumList = await _albumProvider.GetAlbumByDate(album.PublicDate);
+                if (album != null)
+                {
+                    ViewBag.Album = _albumList;
+                    int pageindex = 1;
+                    var recordCount = _albumList.Count();
+                    if (Request.QueryString["page"] != null)
+                        pageindex = Convert.ToInt32(Request.QueryString["page"]);
+                    const int PAGE_SZ = 10;
+
+                    ViewBag.Album = _albumList.OrderByDescending(art => art.AlbumId)
+                       .Skip((pageindex - 1) * PAGE_SZ)
+                       .Take(PAGE_SZ).ToList();
+                    ViewBag.Pager = new PagerHelper()
+                    {
+                        PageIndex = pageindex,
+                        PageSize = PAGE_SZ,
+                        RecordCount = recordCount,
+                    };
+                }
+                else
+                {
+                    ViewBag.Msg = "There are no data named " + ArtistName;
+                }
             }
             else
             {

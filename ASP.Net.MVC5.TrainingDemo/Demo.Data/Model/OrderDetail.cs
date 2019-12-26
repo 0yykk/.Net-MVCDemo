@@ -20,6 +20,6 @@ namespace Demo.Data.Model
         [ForeignKey("Order")]
         public string OrderGuid { get; set; }
         public Order Order { get; set; }
-        public int nowTotalPrice { get; set; }
+        public decimal nowTotalPrice { get; set; }
     }
 }

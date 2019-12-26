@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo.Data.Model
+namespace Demo.Domain
 {
-    [Table("Order")]
-    public class Order
+    public class OrderViewModel
     {
-        
-        [Key]
         public string OrderGuid { get; set; }
         public DateTime OrderDate { get; set; }
         public string UserName { get; set; }
@@ -25,7 +20,6 @@ namespace Demo.Data.Model
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public decimal TotalPrice { get; set; }
-        public IList<OrderDetail> OrderDetails { get; set; }
+        public int TotalPrice { get; set; }
     }
 }

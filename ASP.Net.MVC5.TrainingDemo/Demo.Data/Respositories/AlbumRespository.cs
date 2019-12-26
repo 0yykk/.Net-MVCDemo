@@ -43,7 +43,8 @@ namespace Demo.Data.Respositories
             AList = _dbContext.Database.SqlQuery<AlbumViewModel>(
                 $"{storeProcedureName}"
                 ).ToList();
-           
+            //MusicStoreContext db = new MusicStoreContext();
+            //DatabaseSeed.SeedDatabaseOrder(db);
             return (AList==null)?null:AList;
         }
         public async Task<List<AlbumViewModel>> GetAlbumByDate(DateTime date)

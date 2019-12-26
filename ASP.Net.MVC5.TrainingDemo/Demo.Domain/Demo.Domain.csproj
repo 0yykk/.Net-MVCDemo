@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="AlbumViewModel.cs" />
     <Compile Include="ArtistViewModel.cs" />
+    <Compile Include="CartListView.cs" />
     <Compile Include="GenreViewModel.cs" />
+    <Compile Include="OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

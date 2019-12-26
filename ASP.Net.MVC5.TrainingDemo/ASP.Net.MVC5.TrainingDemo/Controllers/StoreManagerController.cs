@@ -138,6 +138,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
 
             return Json(result);
         }
+
         [HttpPost]
         public async Task<ActionResult> Store(AlbumViewModel album)
         {

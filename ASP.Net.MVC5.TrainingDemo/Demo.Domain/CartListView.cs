@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ASP.Net.MVC5.TrainingDemo.Models
+namespace Demo.Domain
 {
     public class CartListView
     {
@@ -11,6 +12,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Models
         public string Title { get; set; }
         public string ArtistName { get; set; }
         public string GenreName { get; set; }
-        public string Price { get; set; }
+        public decimal Price { get; set; }   
+        public int Count { get; set; }
     }
 }

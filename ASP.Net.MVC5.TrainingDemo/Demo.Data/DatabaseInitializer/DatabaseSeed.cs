@@ -31,6 +31,27 @@ namespace Demo.Data.DatabaseInitializer
             AlbumList.ForEach(s => context.Album.Add(s));
             context.SaveChanges();  
         }
+        public static void SeedDatabaseOrder(MusicStoreContext db)
+        {
+            var _Order = new Order()
+            {
+                OrderGuid = "12345",
+                OrderDate = DateTime.Now,
+                UserName = "1234",
+                FirstName = "123345",
+                LastName = "12345",
+                Address = "123214",
+                City = "12345",
+                State = "1234",
+                PostalCode = "1234",
+                Country = "123",
+                Phone = "1234",
+                Email = "1234",
+                TotalPrice = 123
+            };
+            db.Order.Add(_Order);
+            db.SaveChanges();
+        }
 
     }
 }

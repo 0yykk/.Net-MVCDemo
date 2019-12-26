@@ -18,15 +18,19 @@
 
         $.ajax({
             type: "POST",
-            url: "../Cart/OrderRequest",
+            url: "../Cart/Order",
             contentType: "application/json;charset=UTF-8",
             data: JSON.stringify(result),
             dataType: "json",
             contentType: "application/json",
             success: function (data) {
-
+                debugger;
+                if (data == 'success')
+                    alert(1);
+                //document.location.href = '../Cart/Order';
             }
 
         });
+        
     })
     })

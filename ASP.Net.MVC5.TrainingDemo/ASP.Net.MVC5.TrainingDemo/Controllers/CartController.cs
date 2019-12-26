@@ -1,5 +1,6 @@
 ﻿using ASP.Net.MVC5.TrainingDemo.Models;
 using Demo.Domain;
+using Demo.Provider.Provider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,20 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
 {
     public class CartController : Controller
     {
-        // GET: Cart
+        private readonly IOrderProvider _orderProvider;
+        public CartController(IOrderProvider orderProvider)
+        {
+            _orderProvider = orderProvider;
+        }
+        //GET: Cart
         public ActionResult Order()
         {
             return View();
         }
         public ActionResult ShoppingDetail()
         {
+            string orderGuid = Request.QueryString["OrderGuid"];
+
             return View();
         } 
         public ActionResult ShoppingCart()
@@ -33,7 +41,24 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
         {
             List<CartListView> i = new List<CartListView>();
             i = cartTable;
+            
             return View("Order");
+        }
+        
+        public JsonResult OrderList(List<CartListView> cartTable)
+        {
+            List<CartListView> i = new List<CartListView>();
+            i = cartTable;
+            decimal totalPrice = 0;
+            
+            foreach(var item in cartTable)
+            {  
+                totalPrice += item.Count * item.Price;
+                
+            }
+            string a=_orderProvider.CreateOrder(i, totalPrice);
+            return Json(a, JsonRequestBehavior.AllowGet);
+
         }
 
     }

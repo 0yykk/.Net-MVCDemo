@@ -26,11 +26,13 @@ namespace ASP.Net.MVC5.TrainingDemo.App_Start
             builder.RegisterType<AlbumRespository>().As<IAlbumRespository>().InstancePerRequest();
             builder.RegisterType<GenreRespository>().As<IGenreRespository>().InstancePerRequest();
             builder.RegisterType<OrderRespository>().As<IOrderRespository>().InstancePerRequest();
+            builder.RegisterType<RegionDDLRespository>().As<IRegionDDLRespository>().InstancePerRequest();
 
             //Provider
             builder.RegisterType<AlbumProvider>().As<IAlbumProvider>().InstancePerRequest();
             builder.RegisterType<GenreProvider>().As<IGenreProvider>().InstancePerRequest();
             builder.RegisterType<OrderProvider>().As<IOrderProvider>().InstancePerRequest();
+            builder.RegisterType<ddlProvider>().As<IddlProvider>().InstancePerRequest();
             //other
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
 

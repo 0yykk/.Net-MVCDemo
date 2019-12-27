@@ -44,9 +44,12 @@
     <Compile Include="AlbumViewModel.cs" />
     <Compile Include="ArtistViewModel.cs" />
     <Compile Include="CartListView.cs" />
+    <Compile Include="CityViewModel.cs" />
+    <Compile Include="CountryViewModel.cs" />
     <Compile Include="GenreViewModel.cs" />
     <Compile Include="OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StateViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -20,6 +20,6 @@ namespace Demo.Domain
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public int TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

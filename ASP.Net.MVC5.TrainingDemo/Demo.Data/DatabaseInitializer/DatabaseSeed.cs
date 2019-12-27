@@ -52,6 +52,33 @@ namespace Demo.Data.DatabaseInitializer
             db.Order.Add(_Order);
             db.SaveChanges();
         }
+        public static void SeedDatabaseSeedCountry(MusicStoreContext db)
+        {
+            var _Country = new Country()
+            {
+                CountryCode = "03",
+                CountryName = "USA"
+            };
+            var _State = new State()
+            {
+                StateCode = "02",
+                StateName = "Texas",
+                CountryCode = "03"
+            };
+            var _City = new City()
+            {
+                CityCode = "04",
+                CityName = "Houston",
+                StateCode = "02"
+            };
+            db.Countries.Add(_Country);
+            db.SaveChanges();
+            db.States.Add(_State);
+            db.SaveChanges();
+            db.Cities.Add(_City);
+            db.SaveChanges();
+
+        }
 
     }
 }

@@ -2,6 +2,284 @@
 @{
     ViewBag.Title = "ShoppingDetail";
 }
+@model Demo.Domain.OrderViewModel
 
-<h2>ShoppingDetail</h2>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 
+<div class="container">
+    <div class="row" style="margin-top:50px;">
+        <h2>Order Confirmation<small>New Order</small></h2>
+    </div>
+    <div class="row" style="margin-top:40px;">
+        <table class="table table-hover table-striped" id="cartdetail">
+            @{
+                var list = ViewBag.OrederDetail as List<Demo.Domain.CartListView>;
+                if (list != null && list.Count > 0)
+                {
+                    <thead>
+                        <tr>
+                            <th class="td">#</th>
+                            <th class="td" data-type="num">AlbumID</th>
+                            <th class="td" data-type="string">Title</th>
+                            <th class="td" data-type="string">Artist</th>
+                            <th class="td" data-type="string">Genre</th>
+                            <th class="td" data-type="string">Price</th>
+                            <th class="td" data-type="string">Count</th>
+                            <th class="td" data-type="string"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="ctbody">
+                        @{
+                            foreach (var item in list)
+                            {
+                                <tr>
+                                    <td id="chebox">
+                                        <input name="Album1" class="checkbox" type="checkbox" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.AlbumId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.ArtistName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.GenreName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelitem => item.Price)
+                                    </td>
+                                    <td>
+                                        <div class="input-group input-group-sm" style="width:130px">
+                                            <span class="input-group-addon" id="sizing-addon3" style="width:30px">Count</span>
+                                            <input type="number" class="form-control alert-warning input-sm" min="1" value="1" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteItem(@item.AlbumId)">Delete</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                }
+            }
+        </table>
+    </div>
+    <hr />
+    <div class="row">
+        <p class="lead">Please input your email address....</p>
+    </div>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrderGuid, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group">
+
+                            @Html.DisplayFor(model => model.OrderGuid, new { @class = "form-control", @style = "width:230px;height:36px" })
+                            @Html.ValidationMessageFor(model => model.OrderGuid, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group">
+
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @style = "width:400px;height:36px" })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group">
+
+                            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @style = "width:400px;height:36px" })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group">
+
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @style = "width:400px;height:36px" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group" style="width:280px">
+                            <select id="CountryName" data-toggle="select" class="form-control select select-default" name="CountryName">
+                                <option value="default" selected="selected">--Please select--</option>
+                                @{
+                                    var Countrylist = ViewBag.CountryList as List<Demo.Domain.CountryViewModel>;
+                                    if (Countrylist != null && Countrylist.Count > 0)
+                                    {
+                                        foreach (var item in Countrylist)
+                                        {
+                                            <option value="@item.CountryCode">
+                                                @item.CountryName
+                                            </option>
+                                        }
+
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group" style="width:280px">
+                            <select id="StateName" data-toggle="select" class="form-control select select-default" name="StateName">
+                                <option value="default" selected="selected">--Please select--</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group" style="width:280px">
+                            <select id="CityName" data-toggle="select" class="form-control select select-default" name="CityName">
+                                <option value="default" selected="selected">--Please select--</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @style = "width:400px;height:36px" })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control", @style = "width:400px;height:36px" })
+                            @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TotalPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group">
+
+                            @Html.DisplayFor(model => model.TotalPrice, new { @class = "form-control", @style = "width:230px;height:36px" })
+                            @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+     }
+    <div class="row"></div>
+</div>
+
+<address>
+    One Microsoft Way<br />
+    Redmond, WA 98052-6399<br />
+    <abbr title="Phone">P:</abbr>
+    425.555.0100
+</address>
+
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CountryName").change(function () {
+            debugger;
+            var country = $("#CountryName").val();
+            var state = $("#StateName");
+            $.ajax({
+                url: "../Cart/GetStateList",
+                type: "post",
+                data: JSON.stringify({
+                    countryCode: country
+                }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    var html = "<option value=''>--Please select--</option>";
+                    state.html("");
+                    $.each(result, function (i, data) {
+                        html += "<option value=" + data.StateCode + ">" + data.StateName + "</option>";
+                    });
+                    state.append(html);
+                }
+            });
+        })
+
+        $("#StateName").change(function () {
+            debugger;
+            var state = $("#StateName").val();
+            var city = $("#CityName");
+            $.ajax({
+                url: "../Cart/GetCityList",
+                type: "post",
+                data: JSON.stringify({
+                    stateCode: state
+                }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    var html = "<option value=''>--Please select--</option>";
+                    city.html("");
+                    $.each(result, function (i, data) {
+                        html += "<option value=" + data.CityCode + ">" + data.CityName + "</option>";
+                    });
+                    city.append(html);
+                }
+            });
+        })
+    })
+
+    function deleteItem(id) {
+        debugger;
+        var test = window.location.search;
+        if (confirm("Are you sure you want to delete it?")) {
+
+                $.post("@Url.Action("Delete", "Cart")", { Id: id,orderId:test }, function (data) {
+
+                    if (data.IsSuccess) {
+                        location.reload();
+                        alert(data.ErrorMessage);
+                    }
+                    else {
+                        alert(data.ErrorMessage);
+                    }
+
+                }, "json");
+            }
+    }
+</script>

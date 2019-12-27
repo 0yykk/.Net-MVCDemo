@@ -15,6 +15,9 @@ namespace Demo.Data.Contexts
         DbSet<Genre> Genre { get; set; }
         DbSet<Order> Order { get; set; }
         DbSet<OrderDetail> OrderDetail { get; set; }
+        DbSet<Country> Countries { get; set; }
+        DbSet<State> States { get; set; }
+        DbSet<City> Cities { get; set; }
         Database GetDb();
         DbContext GetDbContext();
 
@@ -33,6 +36,9 @@ namespace Demo.Data.Contexts
         public virtual DbSet<Genre> Genre { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
         public Database GetDb()
         {
             return Database;

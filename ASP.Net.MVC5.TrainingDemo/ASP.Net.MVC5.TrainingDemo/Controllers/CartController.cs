@@ -13,21 +13,43 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
     public class CartController : Controller
     {
         private readonly IOrderProvider _orderProvider;
-        public CartController(IOrderProvider orderProvider)
+        private readonly IddlProvider _ddlProvider;
+        public CartController(IOrderProvider orderProvider,
+            IddlProvider ddlProvider
+            )
         {
             _orderProvider = orderProvider;
+            _ddlProvider = ddlProvider;
         }
         //GET: Cart
         public ActionResult Order()
         {
             return View();
         }
-        public ActionResult ShoppingDetail()
+        public async Task<ActionResult> ShoppingDetail()
         {
             string orderGuid = Request.QueryString["OrderGuid"];
-
-            return View();
-        } 
+            var modelOrder = new OrderViewModel();
+            modelOrder =await  _orderProvider.getOrder(orderGuid);
+            var modelCart = await _orderProvider.getCartList(orderGuid);
+            ViewBag.OrederDetail = modelCart;
+            var countryList = new List<CountryViewModel>();
+            countryList = await _ddlProvider.GetCountryList();
+            ViewBag.CountryList = countryList;
+            return View(modelOrder);
+        }
+        public JsonResult GetStateList(string countryCode)
+        {
+            List<StateViewModel> stateList = new List<StateViewModel>();
+            stateList = _ddlProvider.GetStateList(countryCode);
+            return Json(stateList, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetCityList(string stateCode)
+        {
+            List<CityViewModel> cityList = new List<CityViewModel>();
+            cityList = _ddlProvider.GetCityList(stateCode);
+            return Json(cityList, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult ShoppingCart()
         {
             var list = new List<CartListView>();
@@ -59,6 +81,34 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             string a=_orderProvider.CreateOrder(i, totalPrice);
             return Json(a, JsonRequestBehavior.AllowGet);
 
+        }   
+        public ActionResult Delete(int id,string orderId)
+        {
+            if (orderId.IndexOf('?') != -1)
+            {
+                var str = orderId.Split('?')[1];
+                 str = str.Split('=')[1];
+            }
+            
+            var result = new DeleteMassage();  
+            int returnValue = _orderProvider.DeleteItem(id, str);
+            if (returnValue == 0)
+            {
+                result.IsSuccess = true;
+                result.ErrorMessage = "Delete success!";
+            }
+
+            else
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "The current legion has been deleted!";
+            }
+            //else
+            //{
+            //result.IsSuccess = false;
+            //result.ErrorMessage = "Network busy, please try again later";
+            //}
+            return Json(result);
         }
 
     }

@@ -58,7 +58,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
                 ViewBag.Album = _albumList.OrderByDescending(alb => alb.AlbumId)
                     .Skip((pageindex - 1) * PAGE_SZ)
                     .Take(PAGE_SZ).ToList();
-                ViewBag.Paper = new PagerHelper()
+                ViewBag.Pager = new PagerHelper()
                 {
                     PageIndex = pageindex,
                     PageSize = PAGE_SZ,

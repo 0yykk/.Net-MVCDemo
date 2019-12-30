@@ -1,0 +1,59 @@
+﻿@using Demo.Core.Utilities
+@{
+    Layout = null;
+    var _action = ViewContext.RouteData.Values["action"].ToString();
+    PagerHelper _pager = ViewBag.Pager as PagerHelper;
+    var routeValues = ViewContext.RouteData.Values;
+    foreach (string key in Request.QueryString.Keys)
+    {
+        routeValues[key] = Request.QueryString[key];
+    }
+}
+
+<div style="text-align:center">
+    <ul class="pagination">
+        @if (_pager.PageIndex == 0)
+        {
+
+            <li><a href="###">&laquo;</a></li>
+        }
+        else
+        {
+            routeValues["page"] = _pager.PageIndex - 1;
+
+            <li>
+                @Html.ActionLink("«", _action, routeValues)
+            </li>
+        }
+        @foreach (int p in _pager.Pages)
+        {
+            if (p < 0)
+            {
+                <li><a>- - -</a></li>
+            }
+            else if (p == _pager.PageIndex)
+            {
+                <li class="active">
+                    <a href="#">@p</a>
+                </li>
+            }
+            else
+            {
+                routeValues["page"] = p;
+                <li>@Html.ActionLink(p.ToString(), _action, routeValues)</li>
+            }
+        }
+        @if (_pager.PageIndex == _pager.PageCount)
+        {
+            <li><a href="###">&raquo;</a></li>
+        }
+        else
+        {
+            routeValues["page"] = _pager.PageIndex + 1;
+            <li>
+                @Html.ActionLink("»", _action, routeValues)
+            </li>
+        }
+    </ul>
+</div>
+

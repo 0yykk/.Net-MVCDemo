@@ -2,6 +2,323 @@
 @{
     ViewBag.Title = "Order";
 }
+@model Demo.Domain.OrderViewModel
 
-<h2>Order</h2>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 
+<div class="page-header">
+    <h2>My Order <small>Order List</small></h2>
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel1" style="text-align:center">Order Detial</h4>
+            </div>
+            <div class="modal-body">
+                <label id="12"></label>
+                <table class="table table-hover table-striped" id="cartTable1">
+                    <thead>
+                    <thead>
+                        <tr>
+                            <th class="td">#</th>
+                            <th class="td" data-type="num">AlbumID</th>
+                            <th class="td" data-type="string">Title</th>
+                            <th class="td" data-type="string">Artist</th>
+                            <th class="td" data-type="string">Genre</th>
+                            <th class="td" data-type="decimal">Price</th>
+                            <th class="td" data-type="string">Count</th>
+                            <th class="td" data-type="string"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="ctbody1">
+                        @*<tr id="1">
+                                <td id="chebox">
+                                    <input name="Album1" class="checkbox" type="checkbox" />
+                                </td>
+                                <td>
+                                    The Who
+                                </td>
+                                <td>
+                                    The Who
+                                </td>
+                                <td>
+                                    The Who
+                                </td>
+                                <td>
+                                    The Who
+                                </td>
+                                <td>
+                                    The Who
+                                </td>
+                                <td>
+                                    <div class="input-group input-group-sm" style="width:130px">
+                                        <span class="input-group-addon" id="sizing-addon3" style="width:30px">Count</span>
+                                        <input type="number" class="form-control alert-warning input-sm" min="1" value="1"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                </td>
+                            </tr>*@
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="cartSubmit" onclick="cart()">Submit</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+
+</div>
+<div style="width:100%;">
+
+    @using (Html.BeginForm("Order", "Cart", FormMethod.Post))
+    {
+        <div class="row" style="margin-top:40px;padding:10px">
+
+            <div class="col-md-4 col-md-offset-2">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.UserName, "", new{
+                         @class = "form-control autocomplete",
+                         @placeholder = "Enter User Name",
+                         @onblur = "javascript: ReplaceSepcialValue(this);"
+                        })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.OrderDate, htmlAttributes: new { id = "Date", onclick = "WdatePicker();", type = "text", Value = "", autocomplete = "off", @class = "form-control" })
+                            <span class="input-group-btn">
+                                <img width="40" height="42" id="1" style="cursor: pointer;" onclick="WdatePicker({el:'d1'})" src="../images/calendar.png">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <button id="subSearch" type="submit" class="btn btn-primary btn-block " style="margin-left:10px;width:90px">Search</button>
+                </div>
+            </div>
+        </div>
+
+    }
+    <div class="row" style="margin-top:40px;">
+        <table class="table table-hover table-striped">
+            @{
+                var list = ViewBag.OrderList as List<Demo.Domain.OrderViewModel>;
+                if (list != null && list.Count > 0)
+                {
+                    <thead>
+                        <tr>
+                            <th class="td">#</th>
+                            <th class="td" data-type="string">OrderGuid</th>
+                            <th class="td" data-type="date">OrderDate</th>
+                            <th class="td" data-type="string">Username</th>
+                            <th class="td" data-type="string">Country</th>
+                            <th class="td" data-type="string">State</th>
+                            <th class="td" data-type="string">City</th>
+                            <th class="td" data-type="string">Address</th>
+                            <th class="td" data-type="string">Phone</th>
+                            <th class="td" data-type="decimal">TotalPrice</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in list)
+                            {
+                                <tr>
+                                    <td>
+                                        <input class="checkbox" type="checkbox" />
+                                    </td>
+                                    <td class="td1 guid">
+                                        @Html.DisplayFor(modelitem => item.OrderGuid)
+                                    </td>
+                                    <td class="td1">
+                                        @Html.DisplayFor(modelitem => item.OrderDate)
+                                    </td>
+                                    <td class="td1">
+                                        @Html.DisplayFor(modelitem => item.UserName)
+                                    </td>
+                                    <td class="td1">
+                                        @Html.DisplayFor(modelitem => item.Country)
+                                    </td>
+                                    <td class="td1">
+                                        @Html.DisplayFor(modelitem => item.State)
+                                    </td>
+                                    <td class="td1">
+                                        @Html.DisplayFor(modelitem => item.City)
+                                    </td>
+                                    <td class="td1">
+                                        @Html.DisplayFor(modelitem => item.Address)
+                                    </td>
+                                    <td class="td1">
+                                        @Html.DisplayFor(modelitem => item.Phone)
+                                    </td>
+                                    <td class="td1">
+                                        @Html.DisplayFor(modelitem => item.TotalPrice)
+                                    </td>
+                                    <td>
+                                        <a href="javascript:void(0)" onclick="deleteOrder('@item.OrderGuid')" class="btn btn-danger btn-xs" style="margin-right: 10px;">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                }
+            }
+        </table>
+
+    </div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+
+</div>
+@{
+    //var list2 = ViewBag.Legion as List<PandaRG.LegionRollOutMaintain.Web.Models.LegionRolloutInfo>;
+    if (list != null && list.Count > 0)
+    {
+        @Html.Partial("Pager")
+
+    }
+}
+<script type="text/javascript">
+    $(".td1").click(function () {
+        debugger;
+        var id = $(this).parent("tr");
+        var a = id.find(".guid");
+        var b = a.text();
+        $("#ctbody1").find('tr').empty();
+        $.ajax({
+            type: "POST",
+            url: "../Cart/GetOrderDetail",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(
+                { orderguid: b }
+            ),
+
+            success: function (result) {
+                debugger;
+                if (result != null)
+                    $.each(result, function (i, data) {
+                        addRow(data.AlbumId, data.Title, data.ArtistName, data.GenreName, data.Price, data.Count)
+                    });
+                $('#myModal2').modal('show');
+            }
+        })
+    });
+    //$("table tr").bind("click", function () {
+    //    debugger;
+    //    var id = this.cells[1].childNodes[0].textContent;
+    //    $("#ctbody1").find('tr').empty();
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "../Cart/GetOrderDetail",
+    //        contentType: "application/json;charset=UTF-8",
+    //        dataType: "json",
+    //        contentType: "application/json",
+    //        data: JSON.stringify(
+    //            { orderguid: id }
+    //        ),
+
+    //        success: function (result) {
+    //            debugger;
+    //            if (result != null)
+    //                $.each(result, function (i, data) {
+    //                    addRow(data.AlbumId, data.Title, data.ArtistName, data.GenreName, data.Price, data.Count)
+    //                });
+    //            $('#myModal2').modal('show');
+    //        }
+    //    })
+    //});
+
+    function addRow(id, title, artist, genre, price, count) {
+        debugger;
+        var tb = document.getElementById("ctbody1");
+        var i = tb.childElementCount;
+        var row;
+        row = tb.insertRow();
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        var cell7 = row.insertCell(6);
+        var cell8 = row.insertCell(7);
+        var e1 = document.createElement("input");
+        e1.type = "checkbox"
+        e1.name = "cell1name" + i;
+        var e2 = document.createElement("label");
+        e2.type = "text";
+        e2.name = "cell2name" + i;
+        e2.innerText = id;
+        var e3 = document.createElement("label");
+        e3.type = "text";
+        e3.name = "cell3name" + i;
+        e3.innerText = title;
+        var e4 = document.createElement("label");
+        e4.type = "text";
+        e4.name = "cell4name" + i;
+        e4.innerText = artist;
+        var e5 = document.createElement("label");
+        e5.type = "text";
+        e5.name = "cell5name" + i;
+        e5.innerText = genre;
+        var e6 = document.createElement("label");
+        e6.type = "text";
+        e6.name = "cell6name" + i
+        e6.innerText = price;
+        var e7 = document.createElement("div");
+        e7.name = "cell7name" + i;
+        e7.className = "input-group input-group-sm";
+        e7.style.cssText = "width: 130px";
+        e7.innerHTML = "<span class='input-group-addon' id='sizing-addon2' style='width: 30px'>Count</span>" +
+            "<input type='number' class='form-control alert-warning input-sm' min='1' value='" + count + "'/>";
+        var e8 = document.createElement("div");
+        e8.name = "cell8name" + i
+
+        e8.innerHTML = "<button type='button' class='btn btn-danger btn-sm' onclick='del(this)'>Delete</button>";
+        cell1.appendChild(e1);
+        cell2.appendChild(e2);
+        cell3.appendChild(e3);
+        cell4.appendChild(e4);
+        cell5.appendChild(e5);
+        cell6.appendChild(e6);
+        cell7.appendChild(e7);
+        cell8.appendChild(e8);
+    };
+    
+    function deleteOrder(id){
+        debugger;
+        if (confirm("Are you sure you want to delete it?")) {
+
+                $.post("@Url.Action("DeleteOrder", "Cart")", { Id: id }, function (data) {
+
+                    if (data.IsSuccess) {
+                        location.reload();
+                        alert(data.ErrorMessage);
+                    }
+                    else {
+                        alert(data.ErrorMessage);
+                    }
+
+                }, "json");
+            }
+    }
+</script>

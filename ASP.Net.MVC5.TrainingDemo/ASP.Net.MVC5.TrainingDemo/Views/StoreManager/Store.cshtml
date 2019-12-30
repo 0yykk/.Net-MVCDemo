@@ -245,6 +245,14 @@
 
     </div>
 </div>
+@{
+    
+    if (list != null && list.Count > 0)
+    {
+        @Html.Partial("Pager")
+
+    }
+}
 
 <div id="msg">Add Cart Success！</div>
 <script>
@@ -267,7 +275,7 @@
     }
     function BuyAlbum(id,title,artist,genre,price) {
         debugger;
-        
+
         addRow(id,title,artist,genre,price);
         var offset = $("#end").offset();
         var img = "../images/favicon.png";
@@ -285,7 +293,7 @@
             },
             onEnd: function () {
                 $("#msg").show().animate({ width: '250px' }, 200).fadeOut(1000);
-                
+
 
             }
         });
@@ -328,12 +336,11 @@
 
     function addRow(id,title,artist,genre,price) {
         debugger;
-        var table = document.getElementById("cartTable");
         var tb = document.getElementById("ctbody");
         var i = tb.childElementCount;
-        var row;  
-        row = table.insertRow();
-        var cell1 = row.insertCell(0); 
+        var row;
+        row = tb.insertRow();
+        var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
@@ -364,7 +371,7 @@
         e6.type = "text";
         e6.name = "cell6name" + i
         e6.innerText =price;
-        var e7 = document.createElement("div");  
+        var e7 = document.createElement("div");
         e7.name = "cell7name" + i;
         e7.className = "input-group input-group-sm";
         e7.style.cssText = "width: 130px";
@@ -384,7 +391,7 @@
         cell8.appendChild(e8);
     }
     function del($this) {
-        $($this).parent().parent().parent().remove(); 
+        $($this).parent().parent().parent().remove();
     }
 
 </script>

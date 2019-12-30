@@ -13,7 +13,10 @@ namespace Demo.Provider.Provider
         string CreateOrder(List<CartListView> cartTable, decimal totalprice);
         Task<List<CartListView>>getCartList(string ordguid);
         Task<OrderViewModel> getOrder(string ordguid);
+        Task UpdateOrder(OrderViewModel order);
         int DeleteItem(int id,string orderGuid);
+        Task<List<OrderViewModel>> GetAllOrder();
+        List<CartListView> GetThisOrderDetail(string orderguid);
     }
     public class OrderProvider:IOrderProvider
     {
@@ -27,6 +30,12 @@ namespace Demo.Provider.Provider
             int returnValue=3;
             returnValue = _orderRespository.DeleteItem(id, orderGuid);
             return returnValue;
+        }
+        public List<CartListView> GetThisOrderDetail(string orderguid)
+        {
+            var list = new List<CartListView>();
+            list = _orderRespository.GetThisOrderDetail(orderguid);
+            return (list != null) ? list : new List<CartListView>();
         }
         public string CreateOrder(List<CartListView> cartTable, decimal totalprice)
         {
@@ -44,6 +53,16 @@ namespace Demo.Provider.Provider
             var _orderList = new OrderViewModel();
             _orderList = await _orderRespository.getOrder(ordguid);
             return (_orderList == null) ? new OrderViewModel() : _orderList;
+        }
+        public async Task UpdateOrder(OrderViewModel order)
+        {
+             await _orderRespository.UpdateOrder(order);
+        }
+        public async Task<List<OrderViewModel>> GetAllOrder()
+        {
+            var list = new List<OrderViewModel>();
+            list=await _orderRespository.GetAllOrder();
+            return (list != null) ? list : new List<OrderViewModel>();
         }
     }
 }

@@ -121,7 +121,7 @@
                     @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <div class="input-group" style="width:280px">
-                            <select id="CountryName" data-toggle="select" class="form-control select select-default" name="CountryName">
+                            <select id="Country" data-toggle="select" class="form-control select select-default" name="Country">
                                 <option value="default" selected="selected">--Please select--</option>
                                 @{
                                     var Countrylist = ViewBag.CountryList as List<Demo.Domain.CountryViewModel>;
@@ -144,7 +144,7 @@
                     @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <div class="input-group" style="width:280px">
-                            <select id="StateName" data-toggle="select" class="form-control select select-default" name="StateName">
+                            <select id="State" data-toggle="select" class="form-control select select-default" name="State">
                                 <option value="default" selected="selected">--Please select--</option>
                                 <option value=""></option>
                             </select>
@@ -155,7 +155,7 @@
                     @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <div class="input-group" style="width:280px">
-                            <select id="CityName" data-toggle="select" class="form-control select select-default" name="CityName">
+                            <select id="City" data-toggle="select" class="form-control select select-default" name="City">
                                 <option value="default" selected="selected">--Please select--</option>
                                 <option value=""></option>
                             </select>
@@ -217,10 +217,10 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#CountryName").change(function () {
+        $("#Country").change(function () {
             debugger;
-            var country = $("#CountryName").val();
-            var state = $("#StateName");
+            var country = $("#Country").val();
+            var state = $("#State");
             $.ajax({
                 url: "../Cart/GetStateList",
                 type: "post",
@@ -240,10 +240,10 @@
             });
         })
 
-        $("#StateName").change(function () {
+        $("#State").change(function () {
             debugger;
-            var state = $("#StateName").val();
-            var city = $("#CityName");
+            var state = $("#State").val();
+            var city = $("#City");
             $.ajax({
                 url: "../Cart/GetCityList",
                 type: "post",

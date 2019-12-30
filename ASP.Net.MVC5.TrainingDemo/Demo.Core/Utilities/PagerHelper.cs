@@ -1,26 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
 namespace Demo.Core.Utilities
 {
     public class PagerHelper
     {
         public int RecordCount { get; set; }
+
         public int PageIndex { get; set; }
+
         public int PageSize { get; set; }
+
         public int PageCount
         {
-            get { return (RecordCount - 1) / PageSize; }
+            get
+            {
+                return (RecordCount - 1) / PageSize + 1;
+            }
         }
 
-        const int SHOW_COUNT = 6;
-
+        const int SHOW_COUNT = 6; //This constant represents the number of page links in the middle when there are ellipses on both sides, such as 1..4 5 6 7 8 9..100
         private List<int> CalcPages()
         {
             List<int> pages = new List<int>();
+
             int start = (PageIndex - 1) / SHOW_COUNT * SHOW_COUNT + 1;
             int end = Math.Min(PageCount, start + SHOW_COUNT - 1);
 
@@ -33,6 +38,7 @@ namespace Demo.Core.Utilities
                 start = Math.Max(1, end - SHOW_COUNT);
             }
             pages.AddRange(Enumerable.Range(start, end - start + 1));
+
             if (start == PageIndex && start > 2)
             {
                 pages.Insert(0, start - 1);
@@ -75,6 +81,7 @@ namespace Demo.Core.Utilities
 
             return pages;
         }
+
         /// <summary>
         /// An array of page Numbers used for display that is an ellipsis if there is a page number less than 0 in the middle
         /// </summary>

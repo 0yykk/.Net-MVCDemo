@@ -1,9 +1,11 @@
 ﻿using ASP.Net.MVC5.TrainingDemo.Models;
+using Demo.Core.Utilities;
 using Demo.Domain;
 using Demo.Provider.Provider;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -22,7 +24,27 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             _ddlProvider = ddlProvider;
         }
         //GET: Cart
-        public ActionResult Order()
+        public async Task<ActionResult> Order()
+        {
+            var Orderlist = new List<OrderViewModel>();
+            Orderlist = await _orderProvider.GetAllOrder();
+            int pageindex = 1;
+            var recordCount = Orderlist.Count();
+            if (Request.QueryString["page"] != null)
+                pageindex = Convert.ToInt32(Request.QueryString["page"]);
+            const int PAGE_SZ = 10;
+            ViewBag.OrderList = Orderlist.OrderByDescending(art=>art.OrderGuid)
+                .Skip((pageindex - 1) * PAGE_SZ)
+                .Take(PAGE_SZ).ToList();
+            ViewBag.Pager = new PagerHelper()
+            {
+                PageIndex = pageindex,
+                PageSize = PAGE_SZ,
+                RecordCount = recordCount,
+            };
+            return View();
+        }
+        public ActionResult SubmitSuccess()
         {
             return View();
         }
@@ -82,11 +104,19 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             return Json(a, JsonRequestBehavior.AllowGet);
 
         }   
+        public JsonResult GetOrderDetail(string orderguid)
+        {
+            var i = Regex.Replace(orderguid, @"\n", "").Trim(); 
+            List<CartListView> list = new List<CartListView>();
+            list = _orderProvider.GetThisOrderDetail(i);
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Delete(int id,string orderId)
         {
+            string str = null;
             if (orderId.IndexOf('?') != -1)
             {
-                var str = orderId.Split('?')[1];
+                 str= orderId.Split('?')[1];
                  str = str.Split('=')[1];
             }
             
@@ -101,7 +131,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             else
             {
                 result.IsSuccess = false;
-                result.ErrorMessage = "The current legion has been deleted!";
+                result.ErrorMessage = "The current item has been deleted!";
             }
             //else
             //{
@@ -109,6 +139,22 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             //result.ErrorMessage = "Network busy, please try again later";
             //}
             return Json(result);
+        }
+        public ActionResult DeleteOrder(string Id)
+        {
+            var i = Id;
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> ShoppingDetail(OrderViewModel order)
+        {
+            if (order != null)
+            {
+                await _orderProvider.UpdateOrder(order);
+
+                return Redirect("SubmitSuccess");
+            }
+            return View();
         }
 
     }

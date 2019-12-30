@@ -197,7 +197,10 @@
     <Content Include="images\viewPDF.png" />
     <Content Include="images\wait.gif" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\autocompleteCommon.js" />
     <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\CustomerizedJS\otpremuim.js" />
+    <Content Include="Scripts\CustomerizedJS\ValidateCommon.js" />
     <Content Include="Scripts\DatePicker\calendar.js" />
     <Content Include="Scripts\DatePicker\config.js" />
     <Content Include="Scripts\DatePicker\developmentTool\lang\en.js" />
@@ -226,6 +229,9 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.autocomplete.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -251,11 +257,12 @@
     <Content Include="Views\StoreManager\Add.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\WebPage1.cshtml" />
     <Content Include="Views\Cart\Order.cshtml" />
     <Content Include="Views\Cart\ShoppingDetail.cshtml" />
     <Content Include="Views\StoreManager\AlbumView.cshtml" />
     <Content Include="Views\Cart\ShoppingCart.cshtml" />
+    <Content Include="Views\Cart\SubmitSuccess.cshtml" />
+    <Content Include="Views\Shared\Pager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,6 +17,9 @@ namespace Demo.Data.Respositories
         Task<List<CartListView>> getCartList(string ordguid);
         Task<OrderViewModel> getOrder(string ordguid);
         int DeleteItem(int id,string orderGuid);
+        Task UpdateOrder(OrderViewModel order);
+        Task<List<OrderViewModel>> GetAllOrder();
+        List<CartListView> GetThisOrderDetail(string orderguid);
     }
     public class OrderRespository:IOrderRespository
     {
@@ -27,6 +30,7 @@ namespace Demo.Data.Respositories
             _db = db;
             _dbContext = _db.GetDbContext();
         }
+        
         public int DeleteItem(int id,string orderGuid)
         {
             var db = new MusicStoreContext();
@@ -49,6 +53,40 @@ namespace Demo.Data.Respositories
             }
             return (returnValue = 1);
                 
+        }
+        public async Task<List<OrderViewModel>> GetAllOrder()
+        {
+            var orderList = new List<OrderViewModel>();
+            var orderlist = new List<Order>();
+            orderlist = await _db.Order.ToListAsync();
+            foreach(var item in orderlist)
+            {
+                OrderViewModel order = new OrderViewModel();
+                order.OrderGuid = item.OrderGuid;
+                order.OrderDate = item.OrderDate;
+                order.UserName = item.UserName;
+                order.Phone = item.Phone;
+                order.Country = item.Country;
+                order.State = item.State;
+                order.City = item.City;
+                order.Address = item.Address;
+                order.TotalPrice = item.TotalPrice;
+                orderList.Add(order);
+            }
+            return orderList;
+            
+            
+            
+        }
+        public List<CartListView> GetThisOrderDetail(string orderguid)
+        {
+            var list = new List<CartListView>();
+            var storeProduceName = "[dbo].[GetThisOrderDetail]";
+            var result = _dbContext.Database.SqlQuery<CartListView>(
+                $"{storeProduceName} @guid",
+                new SqlParameter("@guid",orderguid)
+                ).ToList();
+            return result;
         }
         public  string CreatOrder(List<CartListView> cartTable, decimal totalprice)
         {
@@ -95,6 +133,28 @@ namespace Demo.Data.Respositories
                 new SqlParameter("@guid", ordguid)
                 ).FirstOrDefaultAsync();
             return (_orderList != null) ? _orderList : new OrderViewModel();
+        }
+        public async Task UpdateOrder(OrderViewModel order)
+        {
+            var db = new MusicStoreContext();
+            var _City =  _db.Cities.FirstOrDefault(c => c.CityCode == order.City).CityName;
+            var _Country =  _db.Countries.FirstOrDefault(c => c.CountryCode == order.Country).CountryName;
+            var _State =  _db.States.FirstOrDefault(s => s.StateCode == order.State).StateName;
+            var model = await _db.Order.FirstOrDefaultAsync(o => o.OrderGuid == order.OrderGuid);
+            if (model != null)
+            {
+                db.Set<Order>().Attach(model);
+                db.Entry(model).State = EntityState.Modified;
+                model.UserName = order.UserName;
+                model.Phone = order.Phone;
+                model.Email = order.Email;
+                model.Country = _Country;
+                model.State = _State;
+                model.City = _City;
+                model.Address = order.Address;
+                model.PostalCode = order.PostalCode;
+                db.SaveChanges();
+            }
         }
     }
 }

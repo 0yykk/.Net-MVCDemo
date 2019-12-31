@@ -9,7 +9,7 @@ namespace Demo.Domain
     public class OrderViewModel
     {
         public string OrderGuid { get; set; }
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

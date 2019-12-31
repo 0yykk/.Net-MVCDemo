@@ -133,17 +133,31 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
                 result.IsSuccess = false;
                 result.ErrorMessage = "The current item has been deleted!";
             }
+            
+            return Json(result);
+        }
+        public ActionResult DeleteOrder(string Id)
+        {
+            var i = Id;
+            int returnValue = _orderProvider.DeleteOrder(i);
+            var result = new DeleteMassage();
+            if (returnValue == 0)
+            {
+                result.IsSuccess = true;
+                result.ErrorMessage = "Delete success!";
+            }
+
+            else
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "The current order has been deleted!";
+            }
             //else
             //{
             //result.IsSuccess = false;
             //result.ErrorMessage = "Network busy, please try again later";
             //}
             return Json(result);
-        }
-        public ActionResult DeleteOrder(string Id)
-        {
-            var i = Id;
-            return View();
         }
         [HttpPost]
         public async Task<ActionResult> ShoppingDetail(OrderViewModel order)
@@ -154,6 +168,51 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
 
                 return Redirect("SubmitSuccess");
             }
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult>Order(OrderViewModel order)
+        {
+            
+            var orderlist = new List<OrderViewModel>();
+            int pageindex = 1;
+            var recordCount = 0;
+            const int PAGE_SZ = 10;
+            if (order.OrderDate == null && order.UserName != null)
+            {
+                 orderlist = await _orderProvider.GetOrderByUserName(order.UserName);
+                 recordCount = orderlist.Count();
+                 if (Request.QueryString["page"] != null)
+                    pageindex = Convert.ToInt32(Request.QueryString["page"]);
+                             
+            }
+            else if (order.OrderDate!=null&&order.UserName==null)
+            {
+                orderlist = await _orderProvider.GetOrderByDate(Convert.ToDateTime(order.OrderDate));
+                recordCount = orderlist.Count();
+                if (Request.QueryString["page"] != null)
+                    pageindex = Convert.ToInt32(Request.QueryString["page"]);
+            }
+            else if (order.OrderDate != null && order.UserName != null)
+            {
+                orderlist = await _orderProvider.GetOrderByDateandName(Convert.ToDateTime(order.OrderDate), order.UserName);
+                recordCount = orderlist.Count();
+                if (Request.QueryString["page"] != null)
+                    pageindex = Convert.ToInt32(Request.QueryString["page"]);
+            }
+            else
+            {
+                return Redirect("Order");
+            }
+            ViewBag.OrderList = orderlist.OrderByDescending(art => art.OrderGuid)
+                    .Skip((pageindex - 1) * PAGE_SZ)
+                    .Take(PAGE_SZ).ToList();
+            ViewBag.Pager = new PagerHelper()
+            {
+                PageIndex = pageindex,
+                PageSize = PAGE_SZ,
+                RecordCount = recordCount,
+            };
             return View();
         }
 

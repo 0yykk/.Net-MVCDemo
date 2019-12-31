@@ -20,6 +20,10 @@ namespace Demo.Data.Respositories
         Task UpdateOrder(OrderViewModel order);
         Task<List<OrderViewModel>> GetAllOrder();
         List<CartListView> GetThisOrderDetail(string orderguid);
+        int DeleteOrder(string orderguid);
+        Task<List<OrderViewModel>> GetOrderByDate(DateTime? _date);
+        Task<List<OrderViewModel>> GetOrderByUserName(string name);
+        Task<List<OrderViewModel>> GetOrderByDateandName(DateTime? _date, string name);
     }
     public class OrderRespository:IOrderRespository
     {
@@ -54,6 +58,16 @@ namespace Demo.Data.Respositories
             return (returnValue = 1);
                 
         }
+        public int DeleteOrder(string orderguid)
+        {
+            var storeProduceName = "[dbo].[DeleteOrder]";
+            var result = _dbContext.Database.SqlQuery<int>(
+                $"{storeProduceName} @guid",
+                new SqlParameter("@guid", orderguid)
+                ).FirstOrDefault();
+            int i = Convert.ToInt32(result);
+            return i;
+        }
         public async Task<List<OrderViewModel>> GetAllOrder()
         {
             var orderList = new List<OrderViewModel>();
@@ -73,10 +87,17 @@ namespace Demo.Data.Respositories
                 order.TotalPrice = item.TotalPrice;
                 orderList.Add(order);
             }
-            return orderList;
-            
-            
-            
+            return orderList;      
+        }
+        public async Task<List<OrderViewModel>> GetOrderByDate(DateTime? _date)
+        {
+            var list = new List<OrderViewModel>();
+            var storeProduceName = "[dbo].[GetOrderByDate]";
+            var result = await _dbContext.Database.SqlQuery<OrderViewModel>(
+                $"{storeProduceName} @date",
+                new SqlParameter("@date", _date)
+                ).ToListAsync();
+            return result;
         }
         public List<CartListView> GetThisOrderDetail(string orderguid)
         {
@@ -88,6 +109,17 @@ namespace Demo.Data.Respositories
                 ).ToList();
             return result;
         }
+        public async Task<List<OrderViewModel>> GetOrderByDateandName(DateTime? _date, string name)
+        {
+            var list = new List<OrderViewModel>();
+            var storeProduceName = "[dbo].[GetOrderByDateandName]";
+            var result = await _dbContext.Database.SqlQuery<OrderViewModel>(
+                $"{storeProduceName} @date,@name",
+                new SqlParameter("@date", _date),
+                new SqlParameter("@name", name)
+                ).ToListAsync();
+            return result;
+        }
         public  string CreatOrder(List<CartListView> cartTable, decimal totalprice)
         {
             var guid = Guid.NewGuid().ToString();
@@ -95,7 +127,7 @@ namespace Demo.Data.Respositories
              var result=_dbContext.Database.SqlQuery<OrderViewModel>(
                 $"{storeProduceName} @guid,@orderDate,@totalprice",
                 new SqlParameter("@guid", guid),
-                new SqlParameter("@orderDate", DateTime.Now),
+                new SqlParameter("@orderDate", DateTime.Now.ToShortDateString()),
                 new SqlParameter("@totalprice", totalprice)
             ).FirstOrDefault();
             MusicStoreContext db = new MusicStoreContext();
@@ -123,6 +155,16 @@ namespace Demo.Data.Respositories
                 new SqlParameter("@guid", ordguid)
             ).ToListAsync();
             return (_cartList != null) ? _cartList :new List<CartListView>();
+        }
+        public async Task<List<OrderViewModel>> GetOrderByUserName(string name)
+        {
+            var storeNameProduce = "[dbo].[GetOrderByUserName]";
+            var list =new List<OrderViewModel>();
+            list = await _dbContext.Database.SqlQuery<OrderViewModel>(
+                $"{storeNameProduce} @name",
+                new SqlParameter("@name", name)
+                ).ToListAsync();
+            return list;
         }
         public async Task<OrderViewModel> getOrder(string ordguid)
         {

@@ -17,6 +17,10 @@ namespace Demo.Provider.Provider
         int DeleteItem(int id,string orderGuid);
         Task<List<OrderViewModel>> GetAllOrder();
         List<CartListView> GetThisOrderDetail(string orderguid);
+        int DeleteOrder(string orderguid);
+        Task<List<OrderViewModel>> GetOrderByDate(DateTime? _date);
+        Task<List<OrderViewModel>> GetOrderByUserName(string name);
+        Task<List<OrderViewModel>> GetOrderByDateandName(DateTime? _date, string name);
     }
     public class OrderProvider:IOrderProvider
     {
@@ -48,6 +52,24 @@ namespace Demo.Provider.Provider
             _cartList = await _orderRespository.getCartList(ordguid);
             return (_cartList == null) ? new List<CartListView>() : _cartList;
         }
+        public async Task<List<OrderViewModel>> GetOrderByDate(DateTime? _date)
+        {
+            var list = new List<OrderViewModel>();
+            list = await _orderRespository.GetOrderByDate(_date);
+            return (list == null) ? null : list;
+        }
+        public async Task<List<OrderViewModel>> GetOrderByDateandName(DateTime? _date, string name)
+        {
+            var list = new List<OrderViewModel>();
+            list = await _orderRespository.GetOrderByDateandName(_date, name);
+            return (list == null) ? new List<OrderViewModel>() : list;
+        }
+        public async Task<List<OrderViewModel>> GetOrderByUserName(string name)
+        {
+            var list = new List<OrderViewModel>();
+            list = await _orderRespository.GetOrderByUserName(name);
+            return list;
+        }
         public async Task<OrderViewModel> getOrder(string ordguid)
         {
             var _orderList = new OrderViewModel();
@@ -64,5 +86,11 @@ namespace Demo.Provider.Provider
             list=await _orderRespository.GetAllOrder();
             return (list != null) ? list : new List<OrderViewModel>();
         }
+        public int DeleteOrder(string orderguid)
+        {
+            int i = _orderRespository.DeleteOrder(orderguid);
+            return i;
+        }
+
     }
 }

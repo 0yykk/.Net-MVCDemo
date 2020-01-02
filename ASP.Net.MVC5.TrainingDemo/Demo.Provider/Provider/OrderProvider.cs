@@ -21,6 +21,7 @@ namespace Demo.Provider.Provider
         Task<List<OrderViewModel>> GetOrderByDate(DateTime? _date);
         Task<List<OrderViewModel>> GetOrderByUserName(string name);
         Task<List<OrderViewModel>> GetOrderByDateandName(DateTime? _date, string name);
+        void UpdateOrderDetail(List<OrderUpdateViewModel> cartTable, decimal totalprice, string oi);
     }
     public class OrderProvider:IOrderProvider
     {
@@ -34,6 +35,10 @@ namespace Demo.Provider.Provider
             int returnValue=3;
             returnValue = _orderRespository.DeleteItem(id, orderGuid);
             return returnValue;
+        }
+        public void UpdateOrderDetail(List<OrderUpdateViewModel> cartTable, decimal totalprice, string oi)
+        {
+            _orderRespository.UpdateOrderDetail(cartTable, totalprice, oi);
         }
         public List<CartListView> GetThisOrderDetail(string orderguid)
         {

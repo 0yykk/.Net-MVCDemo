@@ -17,6 +17,7 @@
                 <h4 class="modal-title" id="myModalLabel1" style="text-align:center">Order Detial</h4>
             </div>
             <div class="modal-body">
+                <span class="label label-info">Guid</span>
                 <label id="12"></label>
                 <table class="table table-hover table-striped" id="cartTable1">
                     <thead>
@@ -32,37 +33,7 @@
                             <th class="td" data-type="string"></th>
                         </tr>
                     </thead>
-                    <tbody id="ctbody1">
-                        @*<tr id="1">
-                                <td id="chebox">
-                                    <input name="Album1" class="checkbox" type="checkbox" />
-                                </td>
-                                <td>
-                                    The Who
-                                </td>
-                                <td>
-                                    The Who
-                                </td>
-                                <td>
-                                    The Who
-                                </td>
-                                <td>
-                                    The Who
-                                </td>
-                                <td>
-                                    The Who
-                                </td>
-                                <td>
-                                    <div class="input-group input-group-sm" style="width:130px">
-                                        <span class="input-group-addon" id="sizing-addon3" style="width:30px">Count</span>
-                                        <input type="number" class="form-control alert-warning input-sm" min="1" value="1"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                                </td>
-                            </tr>*@
-                    </tbody>
+                    <tbody id="ctbody1"></tbody>
                 </table>
             </div>
             <div class="modal-footer">
@@ -214,8 +185,9 @@
             success: function (result) {
                 debugger;
                 if (result != null)
+                    $("#12").html(b);
                     $.each(result, function (i, data) {
-                        addRow(data.AlbumId, data.Title, data.ArtistName, data.GenreName, data.Price, data.Count)
+                        addRow(data.AlbumId, data.Title, data.ArtistName, data.GenreName, data.Price, data.Count,b)
                     });
                 $('#myModal2').modal('show');
             }
@@ -246,7 +218,7 @@
     //    })
     //});
 
-    function addRow(id, title, artist, genre, price, count) {
+    function addRow(id, title, artist, genre, price, count,b) {
         debugger;
         var tb = document.getElementById("ctbody1");
         var i = tb.childElementCount;
@@ -260,6 +232,7 @@
         var cell6 = row.insertCell(5);
         var cell7 = row.insertCell(6);
         var cell8 = row.insertCell(7);
+        
         var e1 = document.createElement("input");
         e1.type = "checkbox"
         e1.name = "cell1name" + i;
@@ -319,5 +292,47 @@
 
                 }, "json");
             }
+    }
+
+    function del($this) {
+        $($this).parent().parent().parent().remove();
+    }
+
+    function cart() {
+        debugger;
+        var tr = $("#cartTable1 tr");
+        var value = $("#12").html();
+        var result = [];
+        for (var i = 0; i < tr.length; i++) {
+            var tds = $(tr[i]).find("td");
+            if (tds.length > 0) {
+                result.push({
+                    "AlbumId": $(tds[1]).find("label").text(),
+                    "Title": $(tds[2]).find("label").text(),
+                    "ArtistName": $(tds[3]).find("label").text(),
+                    "GenreName": $(tds[4]).find("label").text(),
+                    "Price": $(tds[5]).find("label").text(),
+                    "Count": $(tds[6]).find("input").val(),
+                    "OrderGuid":value
+                })
+            }
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "../Cart/OrderUpdate",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(result),
+
+            success: function (e) {
+                debugger;
+                if (e != null)
+                    alert("Success!");
+                    location.reload();
+            }
+
+        })
     }
 </script>

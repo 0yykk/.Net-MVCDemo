@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +48,7 @@
     <Compile Include="CityViewModel.cs" />
     <Compile Include="CountryViewModel.cs" />
     <Compile Include="GenreViewModel.cs" />
+    <Compile Include="OrderUpdateViewModel.cs" />
     <Compile Include="OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateViewModel.cs" />

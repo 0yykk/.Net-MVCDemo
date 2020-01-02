@@ -60,6 +60,12 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             ViewBag.CountryList = countryList;
             return View(modelOrder);
         }
+        public async Task GetCountryList()
+        {
+            var countryList = new List<CountryViewModel>();
+            countryList = await _ddlProvider.GetCountryList();
+            ViewBag.CountryList = countryList;
+        }
         public JsonResult GetStateList(string countryCode)
         {
             List<StateViewModel> stateList = new List<StateViewModel>();
@@ -103,7 +109,20 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             string a=_orderProvider.CreateOrder(i, totalPrice);
             return Json(a, JsonRequestBehavior.AllowGet);
 
-        }   
+        }
+        public JsonResult OrderUpdate(List<OrderUpdateViewModel> cartTable)
+        {
+            List<OrderUpdateViewModel> i = new List<OrderUpdateViewModel>();
+            i = cartTable;
+            decimal totalPrice = 0;
+            var oi = Regex.Replace(cartTable[0].OrderGuid, @"\n", "").Trim();
+            foreach (var item in cartTable)
+            {
+                totalPrice += item.Count * item.Price;
+            }
+            _orderProvider.UpdateOrderDetail(cartTable, totalPrice, oi);
+            return Json("123", JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetOrderDetail(string orderguid)
         {
             var i = Regex.Replace(orderguid, @"\n", "").Trim(); 
@@ -162,13 +181,17 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
         [HttpPost]
         public async Task<ActionResult> ShoppingDetail(OrderViewModel order)
         {
-            if (order != null)
+
+            if (ModelState.IsValid)
             {
                 await _orderProvider.UpdateOrder(order);
 
                 return Redirect("SubmitSuccess");
             }
-            return View();
+            var modelOrder = new OrderViewModel();
+            modelOrder = await _orderProvider.getOrder(order.OrderGuid);
+            await GetCountryList();
+            return View(modelOrder);
         }
         [HttpPost]
         public async Task<ActionResult>Order(OrderViewModel order)

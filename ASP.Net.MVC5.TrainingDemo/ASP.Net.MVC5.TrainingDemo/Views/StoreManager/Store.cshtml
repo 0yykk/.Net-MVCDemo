@@ -274,9 +274,7 @@
             }
     }
     function BuyAlbum(id,title,artist,genre,price) {
-        debugger;
-
-        addRow(id,title,artist,genre,price);
+        debugger;      
         var offset = $("#end").offset();
         var img = "../images/favicon.png";
         var flyer = $('<img class="u-flyer" src="' + img + '">');
@@ -292,12 +290,23 @@
                 height: 0
             },
             onEnd: function () {
-                $("#msg").show().animate({ width: '250px' }, 200).fadeOut(1000);
-
+                $("#msg").show().animate({ width: '250px' }, 200).fadeOut(500);
+                
 
             }
         });
-
+        var tb = document.getElementById('cartTable');
+        var rows = tb.rows;
+        for (var i = 0; i < rows.length; i++) {
+            var ac = rows[i].cells[1].innerText;
+            if (rows[i].cells[1].innerText == id) {
+                var at = document.getElementById("c" + (i - 1));
+                if (at != null)
+                    at.value = parseInt(at.value) + 1;
+                return;
+            }
+        }
+        addRow(id, title, artist, genre, price);
     }
     function cart() {
         debugger;
@@ -376,7 +385,7 @@
         e7.className = "input-group input-group-sm";
         e7.style.cssText = "width: 130px";
         e7.innerHTML ="<span class='input-group-addon' id='sizing-addon2' style='width: 30px'>Count</span>"+
-            "<input type='number' class='form-control alert-warning input-sm' min='1' value='1'/>";
+            "<input type='number' class='form-control alert-warning input-sm' min='1' id='c"+i+"' value='1'/>";
         var e8 = document.createElement("div");
         e8.name = "cell8name" + i
 

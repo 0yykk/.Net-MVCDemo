@@ -24,6 +24,8 @@ namespace Demo.Data.Respositories
         Task<List<OrderViewModel>> GetOrderByDate(DateTime? _date);
         Task<List<OrderViewModel>> GetOrderByUserName(string name);
         Task<List<OrderViewModel>> GetOrderByDateandName(DateTime? _date, string name);
+        void UpdateOrderDetail(List<OrderUpdateViewModel> cartTable, decimal totalprice,string oi);
+
     }
     public class OrderRespository:IOrderRespository
     {
@@ -145,6 +147,31 @@ namespace Demo.Data.Respositories
                 db.SaveChanges();
             }
             return guid;
+        }
+        public void UpdateOrderDetail(List<OrderUpdateViewModel> cartTable, decimal totalprice,string oi)
+        {
+        var storeProduceName = "[dbo].[UpdateOrderDetailAndOrder]";
+        var result = _dbContext.Database.SqlQuery<OrderViewModel>(
+            $"{storeProduceName} @guid,@totalprice",
+            new SqlParameter("@guid",oi),
+            new SqlParameter("@totalprice",totalprice)
+            ).FirstOrDefault();
+            var ordertailList = new List<OrderDetail>();
+            MusicStoreContext db = new MusicStoreContext();
+            db.Database.ExecuteSqlCommand("DELETE FROM OrderDetail WHERE OrderGuid = {0}", oi);
+            foreach(var item in cartTable)
+            {
+                var newItem = new OrderDetail()
+                {
+                    OrderDetailGuid = Guid.NewGuid().ToString(),
+                    AlbumId = item.AlbumId,
+                    Total = item.Count,
+                    OrderGuid = oi,
+                    nowTotalPrice = (item.Count * (Convert.ToInt32(item.Price)))
+                };
+                db.OrderDetail.Add(newItem);
+                db.SaveChanges();
+            }
         }
         public async Task<List<CartListView>> getCartList(string ordguid)
         {

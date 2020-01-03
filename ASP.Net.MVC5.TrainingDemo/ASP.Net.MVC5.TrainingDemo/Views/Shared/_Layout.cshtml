@@ -10,11 +10,22 @@
     <link href="~/Content/flat-ui.css" rel="stylesheet" />
     <link href="~/fonts/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Content/app.css" type="text/css" />
-    <link rel="stylesheet" href="~/Content/appCommon.css" type="text/css" /> 
-    
+    <link rel="stylesheet" href="~/Content/appCommon.css" type="text/css" />
+
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <style>
+        #bgimg {
+            opacity: 1;
+            background-image: url("../../images/header-app-image.jpg");
+        }
+        #header {
+            opacity: 1;
+            background-color:white;
+        }
+    </style>
+    
 </head>
-<body>
+<body id="bgimg">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -82,10 +93,12 @@
 
     <div id="header" class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        <div style="margin-top:100px;">
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
     </div>
 
     <br /><br /><br /><br /><br /><br /><br /><br /><br />

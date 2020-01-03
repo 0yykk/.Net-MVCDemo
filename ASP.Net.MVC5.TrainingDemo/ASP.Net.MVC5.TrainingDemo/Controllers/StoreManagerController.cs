@@ -53,7 +53,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
                 var recordCount = _albumList.Count();
                 if (Request.QueryString["page"] != null)
                     pageindex = Convert.ToInt32(Request.QueryString["page"]);
-                const int PAGE_SZ = 10;
+                const int PAGE_SZ = 15;
 
                 ViewBag.Album = _albumList.OrderByDescending(alb => alb.AlbumId)
                     .Skip((pageindex - 1) * PAGE_SZ)
@@ -98,15 +98,15 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             }
             ViewBag.GenreList= GenreList;
         }
-        [HttpPost]
-        public async Task<ActionResult> BuyAlbum(int id)
-        { 
-            var list = new CartListView();
-            list.AlbumId = id;
-            System.Web.HttpContext.Current.Session["CartList"] = list;
+        //[HttpPost]
+        //public async Task<ActionResult> BuyAlbum(int id)
+        //{ 
+        //    var list = new CartListView();
+        //    list.AlbumId = id;
+        //    System.Web.HttpContext.Current.Session["CartList"] = list;
 
-            return View();
-        }
+        //    return View();
+        //}
         [HttpPost]
         public ActionResult Edit(AlbumViewModel album)
         {
@@ -176,7 +176,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
                     var recordCount = _albumList.Count();
                     if (Request.QueryString["page"] != null)
                         pageindex = Convert.ToInt32(Request.QueryString["page"]);
-                    const int PAGE_SZ = 10;
+                    const int PAGE_SZ = 15;
 
                     ViewBag.Album = _albumList.OrderByDescending(art => art.AlbumId)
                        .Skip((pageindex - 1) * PAGE_SZ)
@@ -203,7 +203,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
                     var recordCount = _albumList.Count();
                     if (Request.QueryString["page"] != null)
                         pageindex = Convert.ToInt32(Request.QueryString["page"]);
-                    const int PAGE_SZ = 10;
+                    const int PAGE_SZ = 15;
 
                     ViewBag.Album = _albumList.OrderByDescending(art => art.AlbumId)
                        .Skip((pageindex - 1) * PAGE_SZ)
@@ -231,7 +231,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
                     var recordCount = _albumList.Count();
                     if (Request.QueryString["page"] != null)
                         pageindex = Convert.ToInt32(Request.QueryString["page"]);
-                    const int PAGE_SZ = 10;
+                    const int PAGE_SZ = 15;
 
                     ViewBag.Album = _albumList.OrderByDescending(art => art.AlbumId)
                        .Skip((pageindex - 1) * PAGE_SZ)
@@ -259,7 +259,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
                     var recordCount = _albumList.Count();
                     if (Request.QueryString["page"] != null)
                         pageindex = Convert.ToInt32(Request.QueryString["page"]);
-                    const int PAGE_SZ = 10;
+                    const int PAGE_SZ = 15;
 
                     ViewBag.Album = _albumList.OrderByDescending(art => art.AlbumId)
                        .Skip((pageindex - 1) * PAGE_SZ)

@@ -32,7 +32,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             var recordCount = Orderlist.Count();
             if (Request.QueryString["page"] != null)
                 pageindex = Convert.ToInt32(Request.QueryString["page"]);
-            const int PAGE_SZ = 10;
+            const int PAGE_SZ = 15;
             ViewBag.OrderList = Orderlist.OrderByDescending(art=>art.OrderGuid)
                 .Skip((pageindex - 1) * PAGE_SZ)
                 .Take(PAGE_SZ).ToList();
@@ -200,7 +200,7 @@ namespace ASP.Net.MVC5.TrainingDemo.Controllers
             var orderlist = new List<OrderViewModel>();
             int pageindex = 1;
             var recordCount = 0;
-            const int PAGE_SZ = 10;
+            const int PAGE_SZ = 15;
             if (order.OrderDate == null && order.UserName != null)
             {
                  orderlist = await _orderProvider.GetOrderByUserName(order.UserName);

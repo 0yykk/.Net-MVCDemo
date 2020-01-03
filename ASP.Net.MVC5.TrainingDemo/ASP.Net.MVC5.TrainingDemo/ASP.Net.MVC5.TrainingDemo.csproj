@@ -158,6 +158,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\1234.jpg" />
+    <Content Include="images\239294.jpg" />
+    <Content Include="images\789.jpg" />
     <Content Include="images\ajax-loader.gif" />
     <Content Include="images\album.png" />
     <Content Include="images\background.gif" />
@@ -166,12 +169,14 @@
     <Content Include="images\calendar.gif" />
     <Content Include="images\calendar.png" />
     <Content Include="images\calendar_dis.png" />
+    <Content Include="images\chicago_large.jpg" />
     <Content Include="images\Compas.png" />
     <Content Include="images\complete.png" />
     <Content Include="images\complete_disable.png" />
     <Content Include="images\epaws_header.gif" />
     <Content Include="images\epaws_logo.gif" />
     <Content Include="images\favicon.png" />
+    <Content Include="images\header-app-image.jpg" />
     <Content Include="images\imgHelpButton.gif" />
     <Content Include="images\logo.footer.png" />
     <Content Include="images\logo.png" />
@@ -192,6 +197,7 @@
     <Content Include="images\search_disable.png" />
     <Content Include="images\submit.png" />
     <Content Include="images\submit_disable.png" />
+    <Content Include="images\th.png" />
     <Content Include="images\UofPLogo.png" />
     <Content Include="images\Upanda.png" />
     <Content Include="images\viewPDF.png" />
